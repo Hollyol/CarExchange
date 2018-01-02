@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+	<file source-language="en" datatype="plaintext" original="fr\adverts\add.html.twig" >
+		<body>
+			<trans-unit id = "1">
+				<source>adverts.result_plurals</source>
+				<target>
+					{0}Aucune annonce trouvée, désolé...|
+					{1}Une annonce trouvée :|
+					[1, Inf[%count% annonces trouvées :
+				</target>
+			</trans-unit>
+
+			<trans-unit id = "2">
+				<source>Begin date</source>
+				<target>Louer à partir du :</target>
+			</trans-unit>
+
+			<trans-unit id = "3">
+				<source>End date</source>
+				<target>Jusqu'au :</target>
+			</trans-unit>
+
+			<trans-unit id = "7">
+				<source>Submit</source>
+				<target>Checher !</target>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

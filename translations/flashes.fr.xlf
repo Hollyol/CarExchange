@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+	<file source-language="en" datatype="plaintext" original="flashes" >
+		<body>
+			<trans-unit id = "1">
+				<source>account.creation_success</source>
+				<target>Votre compte à été créé avec succès, vous pouvez maintenant vous connecter</target>
+			</trans-unit>
+
+			<trans-unit id = "2">
+				<source>advert.creation_success</source>
+				<target>Votre voiture est maintenant disponible pour une location</target>
+			</trans-unit>
+
+			<trans-unit id = "3">
+				<source>advert.deletion_success</source>
+				<target>Annonce supprimée</target>
+			</trans-unit>
+
+			<trans-unit id = "4">
+				<source>advert.edition_success</source>
+				<target>Annonce modifiée avec succès</target>
+			</trans-unit>
+
+			<trans-unit id = "5">
+				<source>advert.already_rented</source>
+				<target>Cette voiture est dèjà louée pendant cette période</target>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

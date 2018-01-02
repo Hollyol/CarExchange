@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+	<file source-language="en" datatype="plaintext" original="fr\adverts\add.html.twig" >
+		<body>
+			<trans-unit id = "1">
+				<source>Currency</source>
+				<target>Devise :</target>
+			</trans-unit>
+
+			<trans-unit id = "2">
+				<source>Price</source>
+				<target>Prix :</target>
+			</trans-unit>
+
+			<trans-unit id = "3">
+				<source>Time base</source>
+				<target>Base temporelle :</target>
+			</trans-unit>
+
+			<trans-unit id = "4">
+				<source>Billing</source>
+				<target>Comment voulez vous être payé ?</target>
+			</trans-unit>
+
+			<trans-unit id = "5">
+				<source>Euro</source>
+				<target>Euro</target>
+			</trans-unit>
+
+			<trans-unit id = "6">
+				<source>hour</source>
+				<target>heure</target>
+			</trans-unit>
+
+			<trans-unit id = "7">
+				<source>day</source>
+				<target>jour</target>
+			</trans-unit>
+
+			<trans-unit id = "8">
+				<source>month</source>
+				<target>mois</target>
+			</trans-unit>
+
+			<trans-unit id = "9">
+				<source>year</source>
+				<target>an</target>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

@@ -1,0 +1,18 @@
+{% extends "en/layout.html.twig" %}
+
+{% block title %}
+	{{ parent() }} - Sign Up
+{% endblock %}
+
+{% block flashes %}
+	{% for message in app.flashes('signup') %}
+		<p class='flash'>{{ message }}</p>
+	{% endfor %}
+{% endblock %}
+
+{% block content %}
+	<fieldset>
+		<legend><h3>Sign Up :</h3></legend>
+		{{ form(form) }}
+	</fieldset>
+{% endblock %}

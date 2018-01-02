@@ -1,0 +1,53 @@
+app_core.home:
+    path: /{_locale}/
+    defaults:
+        _controller: 'App\Controller\CoreController::index'
+
+app_language:
+    path: /{_locale}/lang
+    methods: post
+    defaults:
+        _controller: 'App\Controller\LanguageController::change'
+
+app_security.login:
+    path: /{_locale}/login
+    defaults:
+        _controller: 'App\Controller\SecurityController::login'
+
+app_security.logout:
+    path: /{_locale}/logout
+
+app_users.signup:
+    path: /{_locale}/users/signup
+    defaults:
+        _controller: 'App\Controller\UsersController::addMember'
+
+app_users.home:
+    path: /{_locale}/users
+    defaults:
+        _controller: 'App\Controller\UsersController::index'
+
+app_adverts.add:
+    path: /{_locale}/adverts/add
+    defaults:
+        _controller: 'App\Controller\AdvertsController::addAdvert'
+
+app_adverts.search:
+    path: /{_locale}/adverts/search
+    defaults:
+        _controller: 'App\Controller\AdvertsController::search'
+
+app_adverts.rent:
+    path: /{_locale}/adverts/{id}/rent
+    defaults:
+        _controller: 'App\Controller\AdvertsController::rent'
+
+app_adverts.delete:
+    path: /{_locale}/adverts/delete/{id}
+    defaults:
+        _controller: 'App\Controller\AdvertsController::delete'
+
+app_adverts.edit:
+    path: /{_locale}/adverts/edit/{id}
+    defaults:
+        _controller: 'App\Controller\AdvertsController::edit'

@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+	<file source-language="en" datatype="plaintext" original="fr\adverts\search.html.twig" >
+		<body>
+			<trans-unit id = "1">
+				<source>Country</source>
+				<target>Pays :</target>
+			</trans-unit>
+
+			<trans-unit id = "2">
+				<source>State</source>
+				<target>Région :</target>
+			</trans-unit>
+
+			<trans-unit id = "3">
+				<source>Town</source>
+				<target>Ville :</target>
+			</trans-unit>
+
+			<trans-unit id = "4">
+				<source>Location</source>
+				<target>Où louer la voiture ?</target>
+			</trans-unit>
+
+			<trans-unit id = "5">
+				<source>France</source>
+				<target>France</target>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

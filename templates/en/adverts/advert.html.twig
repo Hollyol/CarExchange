@@ -1,0 +1,35 @@
+<fieldset>
+	<legend><h2>{{ advert.title }}</h2></legend>
+	<p>
+	Valid from : {{ advert.beginDate|date('d-m-Y') }}, to {{ advert.endDate|date('d-m-Y') }}
+	<br />
+	In {{ advert.location.town }}, {{ advert.location.state }} ({{ advert.location.country }})
+	<br />
+	For {{ advert.billing.price }} {{ advert.billing.currency }}/{{ advert.billing.timeBase }}
+	</p>
+
+	{% if advert.rentals.count > 0 %}
+	<fieldset>
+		<legend><h5>Already rented during these periods :</h5></legend>
+		<p>
+		{% for rental in advert.rentals %}
+			From {{ rental.beginDate|date('d-m-Y') }} to {{ rental.endDate|date('d-m-Y') }}.
+			<br />
+		{% endfor %}
+		</p>
+	</fieldset>
+	{% endif %}
+
+
+	<h3>Car :</h3>
+	{% include "en/cars/car.html.twig" with {'car': advert.car} %}
+	{# current renter #}
+	<nav>
+	{% if (advert.owner == app.user) %}
+		<a href='{{ path('app_adverts.delete', {'id': advert.id}) }}'>Delete</a>
+		<a href='{{ path('app_adverts.edit', {'id': advert.id}) }}'>Edit</a>
+	{% else %}
+		<a href='{{ path('app_adverts.rent', {'id': advert.id}) }}'>Rent It !</a>
+	{% endif %}
+	</nav>
+</fieldset>

@@ -1,0 +1,18 @@
+{% extends "fr/layout.html.twig" %}
+
+{% block title %}
+	{{ parent() }} - Nouveau Compte
+{% endblock %}
+
+{% block flashes %}
+	{% for message in app.flashes('signup') %}
+		<p class='flash'>{{ message }}</p>
+	{% endfor %}
+{% endblock %}
+
+{% block content %}
+	<fieldset>
+		<legend><h3>Créer un compte :</h3></legend>
+		{{ form(form) }}
+	</fieldset>
+{% endblock %}

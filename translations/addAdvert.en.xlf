@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+	<file source-language="en" datatype="plaintext" original="en\adverts\add.html.twig" >
+		<body>
+			<trans-unit id = "1">
+				<source>Title</source>
+				<target>Title :</target>
+			</trans-unit>
+
+			<trans-unit id = "2">
+				<source>Begin date</source>
+				<target>Valid from :</target>
+			</trans-unit>
+
+			<trans-unit id = "3">
+				<source>End date</source>
+				<target>To :</target>
+			</trans-unit>
+
+			<trans-unit id = "4">
+				<source>Car</source>
+				<target>Describe your car :</target>
+			</trans-unit>
+
+			<trans-unit id = "5">
+				<source>Location</source>
+				<target>Where is your car ?</target>
+			</trans-unit>
+
+			<trans-unit id = "6">
+				<source>Billing</source>
+				<target>How do you want to get paid ?</target>
+			</trans-unit>
+
+			<trans-unit id = "7">
+				<source>Submit</source>
+				<target>Rent It !</target>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

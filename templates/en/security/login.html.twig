@@ -1,0 +1,34 @@
+{% extends "en/layout.html.twig" %}
+
+{% block title %}
+	{{ parent() }} - Sign In
+{% endblock %}
+
+{% block content %}
+
+{% block flashes %}
+	{% for message in app.flashes('usignin') %}
+		<p>{{ message|trans({}, 'flashes') }}</p>
+	{% endfor %}
+{% endblock %}
+
+{% if error %}
+	<p>{{ error.messageKey|trans(error.messageData, 'security') }}</p>
+{% endif %}
+
+<form action='{{ path('app_security.login') }}' method='post'>
+	<label for='username'>Pseudo :</label>
+	<input type='text' id='username' name='_username' value='{{ last_username }}' />
+	<br />
+	<label for='password'>Password :</label>
+	<input type='password' id='password' name='_password' />
+
+	{# csrf protection #}
+	<input type='hidden' name='_csrf_token' value = '{{ csrf_token('authenticate') }}' />
+	<br />
+	<button type='submit'>Sign In</button>
+</form>
+
+<p>Don't have an account yet ? <a href='{{ path('app_users.signup') }}'>Sign Up</a> !</p>
+
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "fr/layout.html.twig" %}
+
+{% block title %}
+	{{ parent() }} - Louer
+{% endblock %}
+
+{% block flashes %}
+	{% for message in app.flashes('arent') %}
+		{{ message|trans({}, 'flashes') }}<br />
+	{% endfor %}
+{% endblock %}
+
+{% block content %}
+	{% include "fr/adverts/advert.html.twig" with{'adverts' : advert} %}
+
+	<fieldset>
+		<legend><h2>Propriétaire :</h2></legend>
+		{% include "fr/users/glanceToMember.html.twig" with{'member': advert.owner} %}
+	</fieldset>
+
+	<fieldset>
+		<legend><h2>Demander une location :</h2></legend>
+		{{ form(form) }}
+	</fieldset>
+{% endblock %}

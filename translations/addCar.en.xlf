@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+	<file source-language="en" datatype="plaintext" original="fr\adverts\add.html.twig" >
+		<body>
+			<trans-unit id = "1">
+				<source>Brand</source>
+				<target>Brand :</target>
+			</trans-unit>
+
+			<trans-unit id = "2">
+				<source>Model</source>
+				<target>Model :</target>
+			</trans-unit>
+
+			<trans-unit id = "3">
+				<source>Sits</source>
+				<target>Number of sits :</target>
+			</trans-unit>
+
+			<trans-unit id = "4">
+				<source>Fuel</source>
+				<target>Fuel :</target>
+			</trans-unit>
+
+			<trans-unit id = "5">
+				<source>diesel</source>
+				<target>Diesel</target>
+			</trans-unit>
+
+			<trans-unit id = "6">
+				<source>SP-95</source>
+				<target>SP-95</target>
+			</trans-unit>
+
+			<trans-unit id = "7">
+				<source>SP-98</source>
+				<target>SP-98</target>
+			</trans-unit>
+
+			<trans-unit id = "8">
+				<source>electric</source>
+				<target>Electric</target>
+			</trans-unit>
+
+			<trans-unit id = "9">
+				<source>hybrid</source>
+				<target>Hybrid</target>
+			</trans-unit>
+
+			<trans-unit id = "10">
+				<source>Description</source>
+				<target>Description :</target>
+			</trans-unit>
+
+			<trans-unit id = "11">
+				<source>Car</source>
+				<target>Describe your car :</target>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

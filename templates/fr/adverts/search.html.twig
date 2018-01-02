@@ -1,0 +1,97 @@
+{% extends "fr/layout.html.twig" %}
+
+{% block title %}
+	{{ parent() }} - Chercher une voiture
+{% endblock %}
+
+{% block style %}
+	#map_canva {
+		height: 600px;
+		width: 50%;
+	}
+
+	#results_adverts {
+		width: 50%;
+		height: 600px;
+		overflow: scroll;
+	}
+
+	#results {
+		padding-top: 30px;
+		display :flex;
+	}
+{% endblock %}
+
+{% block scripts %}
+<script type = 'text/javascript'>
+	function initMap() {
+		geocoder = new google.maps.Geocoder();
+
+		var location = {lat: 48.859, lng: 2.346};
+		map = new google.maps.Map(document.getElementById('map_canva'), {
+			zoom: 5,
+			center: location
+		});
+	}
+</script>
+
+<script type='text/javascript'>
+	function putMarker(address) {
+		geocoder.geocode({
+			'address': address
+			}, function(results, status) {
+			if (status == 'OK') {
+				var marker = new google.maps.Marker({
+					map: map,
+					position: results[0].geometry.location
+				});
+			} else {
+				alert('Geocode failed because ' + status);
+			}
+		});
+	}
+</script>
+
+<script>
+	{% if count %}
+	function putMarkers() {
+		{% for advert in listAdverts %}
+			putMarker("{{advert.location.town}}, {{advert.location.state}}");
+		{% endfor %}
+	}
+	window.onload = putMarkers;
+	{% endif %}
+</script>
+
+<script async defer src='https://maps.googleapis.com/maps/api/js?key=AIzaSyA3SpcBhMGT9yd8XOB1Mj1g9Y04kVq-U_k&callback=initMap'></script>
+{% endblock %}
+
+{% block flashes %}
+	{% for message in app.flashes('asearch') %}
+		{{ message|trans({}, 'flashes') }}<br />
+	{% endfor %}
+{% endblock %}
+
+{% block content %}
+	<fieldset>
+		<legend><h2>Chercher une voiture :</h2></legend>
+		<p><strong>Conseil</strong> : Laissez vide si cela vous importe peu.<br />
+		Les dates de début et de fin de location sont <strong>requises</strong></p>
+		{{ form(form) }}
+	</fieldset>
+
+	<div id='results'>
+	<div id='results_adverts'>
+	<fieldset>
+		<h2>{{ 'adverts.result_plurals'|transchoice(count, [], 'searchAdvert') }}</h2>
+		
+		{% include 'fr/adverts/adverts.html.twig' with{'adverts': listAdverts } %}	
+	</fieldset>
+	</div>
+
+	<div id = 'map_canva'>
+		<h6>Chargement de la carte...</h6>
+	</div>
+
+	</div>
+{% endblock %}

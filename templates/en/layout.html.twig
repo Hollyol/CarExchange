@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang = en>
+	<head>
+		<meta charset='utf-8' />
+		<title>
+			{% block title %}
+			CarExchange
+			{% endblock %}
+		</title>
+		<style>
+			{% block style %}{% endblock %}
+		</style>
+		{% block scripts %}{% endblock %}
+	</head>
+
+	<body>
+		<header id='main_header'>
+			<h1>Car Exchange</h1>
+			{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+				<p>Loged as : <strong>
+				<a href='{{ path('app_users.home') }}'>{{ app.user.username }}</a>
+				</strong></p>
+				<a href='{{ path('app_security.logout') }}'>Sign Out</a>
+			{% endif %}
+
+			<form action = '{{ path('app_language') }}' method = 'post'>
+				<select	name='language'>
+					<option value = 'en'>English</option>
+					<option value = 'fr'>Français</option>
+				</select>
+
+				<input name = 'url' type = 'hidden' value = '{{ app.request.uri }}' />
+
+				<input type = 'submit' value = 'Submit' />
+			</form>
+
+			<nav class='main_links'>
+				<a href='#'>Info</a>
+				<a href='#'>Contact</a>
+				<a href='{{ path('app_security.login') }}'>Sign In</a>
+				<a href='{{ path('app_users.signup') }}'>Sign Up</a>
+				<a href='{{ path('app_adverts.add') }}'>Rent your car</a>
+				<a href='{{ path('app_adverts.search') }}'>Look for a car</a>
+			</nav>
+
+			<nav class='meta_links'>
+				{% block links %}{% endblock %}
+			</nav>
+		</header>
+
+		<div class='content'>
+			{% block flashes %}
+			{% endblock %}
+			{% block content %}
+			{% endblock %}
+		</div>
+
+		<footer id='main_footer'>
+			{% block footer %}{% endblock %}
+			<p>Copyright blablabla. All rights reserved<br />
+			<a href='{{ path('app_core.home') }}'>Home</a></p>
+		</footer>
+
+	</body>
+</html>

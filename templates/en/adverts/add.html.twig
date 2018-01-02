@@ -1,0 +1,18 @@
+{% extends "en/layout.html.twig" %}
+
+{% block title %}
+	{{ parent() }} - Rent your car
+{% endblock %}
+
+{% block flashes %}
+	{% for message in app.flashes('addcar') %}
+		<p>{{ message|trans({}, 'flashes') }}</p>
+	{% endfor %}
+{% endblock %}
+
+{% block content %}
+	<fieldset>
+		<legend><h1>New Advert : </h1></legend>
+		{{ form(form) }}
+	</fieldset>
+{% endblock %}

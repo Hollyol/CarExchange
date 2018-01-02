@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+	<file source-language="en" datatype="plaintext" original="fr\users\signup.html.twig" >
+		<body>
+			<trans-unit id = "1">
+				<source>Username</source>
+				<target>Pseudo :</target>
+			</trans-unit>
+
+			<trans-unit id = "2">
+				<source>Password</source>
+				<target>password :</target>
+			</trans-unit>
+
+			<trans-unit id = "3">
+				<source>E-mail</source>
+				<target>E-mail :</target>
+			</trans-unit>
+
+			<trans-unit id = "4">
+				<source>Confirm Password</source>
+				<target>Confirm Password :</target>
+			</trans-unit>
+
+			<trans-unit id = "5">
+				<source>Confirm E-mail</source>
+				<target>Confirm E-mail :</target>
+			</trans-unit>
+
+			<trans-unit id = "6">
+				<source>Phone</source>
+				<target>Phone Number :</target>
+			</trans-unit>
+
+			<trans-unit id = "7">
+				<source>Location</source>
+				<target>Where do you live ?</target>
+			</trans-unit>
+
+			<trans-unit id = "8">
+				<source>Country</source>
+				<target>Country :</target>
+			</trans-unit>
+
+			<trans-unit id = "9">
+				<source>State</source>
+				<target>State :</target>
+			</trans-unit>
+
+			<trans-unit id = "10">
+				<source>Town</source>
+				<target>Town :</target>
+			</trans-unit>
+
+			<trans-unit id = "11">
+				<source>Language</source>
+				<target>Language :</target>
+			</trans-unit>
+
+			<trans-unit id = "12">
+				<source>Français</source>
+				<target>Français</target>
+			</trans-unit>
+
+			<trans-unit id = "13">
+				<source>English</source>
+				<target>English</target>
+			</trans-unit>
+
+			<trans-unit id = "14">
+				<source>Submit</source>
+				<target>Create</target>
+			</trans-unit>
+
+			<trans-unit id = "15">
+				<source>France</source>
+				<target>France</target>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

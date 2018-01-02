@@ -1,0 +1,17 @@
+<fieldset>
+	<legend><h2>{{ rental.advert.title }}</h2></legend>
+
+	<p>
+	Du {{ rental.beginDate|date('d-m-Y') }}, au {{ rental.endDate|date('d-m-Y') }}
+	<br />
+	A {{ rental.advert.location.town }}, {{ rental.advert.location.state }} en {{ rental.advert.location.country }}
+	<br />
+	Au prix de {{ rental.advert.billing.price }} {{ rental.advert.billing.currency }}/{{ rental.advert.billing.timeBase}}
+	</p>
+
+	<h3>Voiture :</h3>
+	{% include "fr/cars/car.html.twig" with{'car' : rental.advert.car} %}
+
+	<h3>Propriétaire :</h3>
+	{% include "fr/users/glanceToMember.html.twig" with{'member' : rental.advert.owner} %}
+</fieldset>

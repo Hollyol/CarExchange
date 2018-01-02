@@ -1,0 +1,35 @@
+{% extends "fr/layout.html.twig" %}
+
+{% block title %}
+	{{ parent() }} - Espace Perso
+{% endblock %}
+
+{% block flashes %}
+	{% for message in app.flashes('uhome') %}
+		{{ message|trans({}, 'flashes') }}<br />
+	{% endfor %}
+{% endblock %}
+
+{% block content %}
+	{% if app.user.adverts.count > 0 %}
+	<fieldset>
+		<legend><h2>Vos annonces :</h2></legend>
+		{% include 'fr/adverts/adverts.html.twig' with {'adverts': app.user.adverts} %}
+	</fieldset>
+	{% else %}
+		<p>Vous n'avez pas d'annonce, voulez vous
+		<a href='{{ path('app_adverts.add') }}'>louer votre voiture</a> ?
+		</p>
+	{% endif %}
+
+	{% if app.user.rentals.count > 0 %}
+	<fieldset>
+		<legend><h2>Vos locations :</h2></legend>
+		{% include 'fr/rentals/rentals.html.twig' with {'rentals': app.user.rentals} %}
+	</fieldset>
+	{% else %}
+		<p>Vous ne prévoyez pas de louer une voiture.
+		<a href='{{ path('app_adverts.search') }}'>En louer une</a> !
+		</p>
+	{% endif %}
+{% endblock %}

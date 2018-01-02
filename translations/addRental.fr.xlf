@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+	<file source-language="en" datatype="plaintext" original="fr\adverts\search.html.twig" >
+		<body>
+			<trans-unit id = "1">
+				<source>Begin date</source>
+				<target>Louer à partir du :</target>
+			</trans-unit>
+
+			<trans-unit id = "2">
+				<source>End date</source>
+				<target>Jusqu'au :</target>
+			</trans-unit>
+
+			<trans-unit id = "3">
+				<source>Submit</source>
+				<target>Louer</target>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

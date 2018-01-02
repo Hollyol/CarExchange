@@ -1,0 +1,35 @@
+{% extends "en/layout.html.twig" %}
+
+{% block title %}
+	{{ parent() }} - Home
+{% endblock %}
+
+{% block flashes %}
+	{% for message in app.flashes('uhome') %}
+		{{ message|trans({}, 'flashes') }}<br />
+	{% endfor %}
+{% endblock %}
+
+{% block content %}
+	{% if app.user.adverts.count > 0 %}
+	<fieldset>
+		<legend><h2>Your Adverts :</h2></legend>
+		{% include 'en/adverts/adverts.html.twig' with {'adverts': app.user.adverts} %}
+	</fieldset>
+	{% else %}
+		<p>You don't own any adverts. Would you like to
+		<a href='{{ path('app_adverts.add') }}'>rent your car</a> ?
+		</p>
+	{% endif %}
+
+	{% if app.user.rentals.count > 0 %}
+	<fieldset>
+		<legend><h2>Your Rentals :</h2></legend>
+		{% include 'en/rentals/rentals.html.twig' with {'rentals': app.user.rentals} %}
+	</fieldset>
+	{% else %}
+		<p>You don't plan to rent any car.
+		<a href='{{ path('app_adverts.search') }}'>Get one now</a> !
+		</p>
+	{% endif %}
+{% endblock %}
