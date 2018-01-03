@@ -60,7 +60,7 @@ class OptionsSetterTest extends TestCase
 	 * @dataProvider typeProvider
 	 *
 	 */
-	public function testType(string $baseType = 'type')
+	public function testType(string $baseType = '')
 	{
 		if ($baseType)
 			$expectedType = $baseType;

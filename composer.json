@@ -10,7 +10,6 @@
         "symfony/framework-bundle": "^4.0",
         "symfony/lts": "^4@dev",
         "symfony/orm-pack": "^1.0",
-        "symfony/phpunit-bridge": "^4.0",
         "symfony/security-bundle": "^4.0",
         "symfony/security-csrf": "^4.0",
         "symfony/translation": "^4.0",
@@ -21,6 +20,7 @@
     },
     "require-dev": {
         "symfony/dotenv": "^4.0",
+        "symfony/phpunit-bridge": "^4.0",
         "symfony/thanks": "^1.0"
     },
     "config": {
