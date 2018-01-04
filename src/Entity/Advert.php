@@ -112,6 +112,35 @@ class Advert
 		}
 	}
 
+	/**
+	 * Check if advert isRented during a period
+	 *
+	 * @param \Datetime beginDate
+	 * @param \Datetime endDate
+	 *
+	 * @return bool
+	 */
+	public function isRented(\Datetime $beginDate, \Datetime $endDate)
+	{
+		$rentals = $this->getRentals();
+		foreach($rentals as $rental){
+			if (
+				//If the beginDate is included in a rental
+				(($rental->getBeginDate() < $beginDate)
+					AND ($rental->getEndDate() > $beginDate))
+				//If the endDate is included in a rental
+				OR (($rental->getBeginDate() < $endDate)
+					AND ($rental->getEndDate() > $endDate))
+				//If the period includes a rental
+				OR (($rental->getBeginDate() > $beginDate)
+					AND ($rental->getEndDate() < $endDate))
+			){
+				return true;
+			}
+		}
+		return false;
+	}
+
 	//LIFECYCLE_CALLBACKS
 
 	/**
@@ -119,12 +148,29 @@ class Advert
 	 */
 	public function setDefaultTitle()
 	{
-		if (!$this->getTitle())
+		if (!$this->getTitle()) {
+			$brand = $this->getCar()->getBrand();
+			$model = $this->getCar()->getModel();
+			$town = $this->getLocation()->getTown();
+
+			if ($brand) {
+				$this->setTitle($brand . ' ');
+			}
+
+			if ($model) {
+				$this->setTitle(
+					$this->getTitle() .
+					$model .
+					' '
+				);
+			}
+
 			$this->setTitle(
-				$this->getCar()->getBrand() . ' ' .
-				$this->getCar()->getModel() . ' in '.
-				$this->getLocation()->getTown()
+				$this->getTitle() .
+				'In ' .
+				$town
 			);
+		}
 	}
 
 	//VALIDATION_CALLBACKS
@@ -149,30 +195,6 @@ class Advert
 		$this->beginDate = new \Datetime();
 		$this->endDate = new \Datetime();
 		$this->hydrate($attr);
-	}
-
-	/**
-	 * Check if advert isRented during a period
-	 *
-	 * @param \Datetime beginDate
-	 * @param \Datetime endDate
-	 *
-	 * @return bool
-	 */
-	public function isRented(\Datetime $beginDate, \Datetime $endDate)
-	{
-		$rentals = $this->getRentals();
-		foreach($rentals as $rental){
-			if (
-				(($rental->getBeginDate() < $beginDate)
-					AND ($rental->getEndDate() > $beginDate))
-				OR (($rental->getBeginDate() < $endDate)
-					AND ($rental->getEndDate() > $endDate))
-			){
-				return true;
-			}
-		}
-		return false;
 	}
 
     /**
