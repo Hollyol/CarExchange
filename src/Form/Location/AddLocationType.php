@@ -5,16 +5,27 @@ namespace App\Form\Location;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+use Doctrine\ORM\EntityManagerInterface;
+
 use App\Form\Location\AbstractLocationType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use App\Form\Location\EventListener\LocationDuplicateSubscriber;
 
 class AddLocationType extends AbstractLocationType
 {
+	private $em;
+
+	public function __construct(EntityManagerInterface $em)
+	{
+		$this->em = $em;
+	}
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
 	{
+		$builder
+			->addEventSubscriber(new LocationDuplicateSubscriber($this->em))
+			;
 	}
     
     /**

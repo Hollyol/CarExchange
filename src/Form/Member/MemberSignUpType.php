@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 use App\Service\Form\OptionsSetter;
 use App\Form\Member\EventListener\MemberFormatingSubscriber;
+use App\Form\Member\EventListener\PasswordEncoderSubscriber;
 
 use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Validator\Constraints\Valid;
@@ -20,6 +21,13 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class MemberSignUpType extends AbstractMemberType
 {
+	private $encoder;
+
+	public function __construct(\Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface $encoder)
+	{
+		$this->encoder = $encoder;
+	}
+
     /**
      * {@inheritdoc}
      */
@@ -38,6 +46,7 @@ class MemberSignUpType extends AbstractMemberType
 				))
 
 			->addEventSubscriber(new MemberFormatingSubscriber())
+			->addEventSubscriber(new PasswordEncoderSubscriber($this->encoder))
 			;
     }
     

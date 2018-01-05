@@ -3,7 +3,6 @@
 namespace App\Service\Format;
 
 use App\Entity\Member;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class MemberFormater
 {

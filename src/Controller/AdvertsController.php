@@ -27,12 +27,6 @@ class AdvertsController extends Controller
 		if ($form->isSubmitted() AND $form->isValid()){
 			$em = $this->getDoctrine()->getManager();
 
-			//Avoid duplicate location
-			$advert->setLocation(
-				$em->getRepository(Location::class)
-				->alreadyExists($advert->getLocation())
-			);
-
 			//Set owner
 			$advert->setOwner($this->getUser());
 

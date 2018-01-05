@@ -28,18 +28,8 @@ class UsersController extends Controller
 
 		$form->handleRequest($request);
 		if ($form->isSubmitted() AND $form->isValid()){
-			//Encode password
-			$member->setPassword(
-				$this->get('security.password_encoder')
-				->encodePassword($member, $member->getPassword())
-			);
 
 			$em = $this->getDoctrine()->getManager();
-			//Avoid duplicate location
-			$member->setLocation(
-				$em->getRepository(Location::class)
-				->alreadyExists($member->getLocation())
-			);
 
 			$em->persist($member);
 			$em->flush();
