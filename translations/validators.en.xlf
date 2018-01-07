@@ -21,6 +21,21 @@
 				<source>sits.lesser_than_one</source>
 				<target>There is at least one sit in a car.</target>
 			</trans-unit>
+
+			<trans-unit id = "5">
+				<source>username.already_used</source>
+				<target>This pseudo is already used.</target>
+			</trans-unit>
+
+			<trans-unit id = "6">
+				<source>phone.already_used</source>
+				<target>This phone number is already used.</target>
+			</trans-unit>
+
+			<trans-unit id = "7">
+				<source>mail.already_used</source>
+				<target>This mail address is already used.</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

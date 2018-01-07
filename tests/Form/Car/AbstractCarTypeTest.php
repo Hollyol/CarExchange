@@ -68,14 +68,22 @@ class AbstractCarTypeTest extends TypeTestCase
 	public function provider()
 	{
 		return array(
-			array(
-				'valid car' => array(
+			'valid car' => array(
+				[
 					'brand' => 'Peugeot',
 					'model' => '307',
 					'sits' => 5,
 					'fuel' => 'diesel',
 					'description' => 'Nice car.',
-			)),
+				]
+			),
+			'sits and fuel not provided' => array(
+				[
+					'brand' => 'Peugeot',
+					'model' => '307',
+					'description' => 'Nice car.',
+				]
+			),
 		);
 	}
 }

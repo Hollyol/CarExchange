@@ -10,8 +10,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-use App\Form\Car\AddCarType;
-use App\Form\Location\AddLocationType;
+use App\Form\Car\AbstractCarType;
+use App\Form\Location\AbstractLocationType;
 use App\Form\Billing\BillingType;
 
 use App\Form\Advert\EventListener\AdvertFormatingSubscriber;
@@ -29,8 +29,10 @@ class AbstractAdvertType extends AbstractType
 			))
 			->add('beginDate', DateType::class)
 			->add('endDate', DateType::class)
-			->add('car', AddCarType::class)
-			->add('location', AddLocationType::class)
+			->add('car', AbstractCarType::class, array(
+				'translation_domain' => 'addCar'
+			))
+			->add('location', AbstractLocationType::class)
 			->add('billing', BillingType::class)
 			->add('submit', SubmitType::class)
 

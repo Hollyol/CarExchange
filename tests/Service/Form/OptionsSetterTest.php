@@ -60,7 +60,7 @@ class OptionsSetterTest extends TestCase
 	 * @dataProvider typeProvider
 	 *
 	 */
-	public function testType(string $baseType = '')
+	public function testType(array $options, string $baseType = '')
 	{
 		if ($baseType)
 			$expectedType = $baseType;
@@ -99,7 +99,7 @@ class OptionsSetterTest extends TestCase
 
 		$mockedBuilder->add('field', SubmitType::class);
 
-		$this->optionsSetter->setOptions($mockedBuilder, 'field', [], $baseType);
+		$this->optionsSetter->setOptions($mockedBuilder, 'field', $options, $baseType);
 	}
 
 	/**
@@ -130,11 +130,14 @@ class OptionsSetterTest extends TestCase
 			->method('getOptions')
 			->will($this->returnValue($realOptions));
 		$mockedBuilder
+			->method('getType')
+			->will($this->returnValue($this->createMock(ResolvedFormTypeInterface::class)));
+		$mockedBuilder
 			->expects($this->once())
 			->method('add')
 			->with(
 				$this->equalTo('field'),
-				$this->equalTo('type'),
+				$this->equalTo('App\\Service\\Form\\OptionsSetter'),
 				$this->callback(
 				function($fieldOptions) use ($providedOptions, $realOptions) {
 					$this->assertLessThanOrEqual(count($providedOptions) + count($realOptions), count($fieldOptions));
@@ -163,7 +166,7 @@ class OptionsSetterTest extends TestCase
 				}
 			));
 
-		$this->optionsSetter->setOptions($mockedBuilder, 'field', $providedOptions, 'type');
+		$this->optionsSetter->setOptions($mockedBuilder, 'field', $providedOptions);
 	}
 
 	public function optionsProvider()
@@ -199,9 +202,18 @@ class OptionsSetterTest extends TestCase
 	public function typeProvider()
 	{
 		return array(
-			'empty type' => array(''),
-			'blank type' => array(' '),
-			'valid type' => array('type'),
+			'empty type' => array(
+				['translation_domain' => ''],
+				'',
+			),
+			'blank type' => array(
+				['translation_domain' => ''],
+				' ',
+			),
+			'valid type' => array(
+				['translation_domain' => ''],
+				'type',
+			),
 		);
 	}
 }

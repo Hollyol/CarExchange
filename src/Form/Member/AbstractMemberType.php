@@ -2,7 +2,7 @@
 
 namespace App\Form\Member;
 
-use App\Form\Location\AddLocationType;
+use App\Form\Location\AbstractLocationType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -37,7 +37,7 @@ class AbstractMemberType extends AbstractType
 				'constraints' => $phoneRegex,
 				'required' => false,
 				))
-			->add('location', AddLocationType::class, array(
+			->add('location', AbstractLocationType::class, array(
 				'constraints' => new Valid(),
 				))
 			->add('language', ChoiceType::class, array(

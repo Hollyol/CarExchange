@@ -14,9 +14,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\HasLifecycleCallbacks()
  * @ORM\Entity(repositoryClass="App\Repository\MemberRepository")
  *
- * @UniqueEntity(fields = "username", errorPath = "username", message = "This pseudo is already used")
- * @UniqueEntity(fields = "mail", errorPath = "mail", message = "This E-mail is already used")
- * @UniqueEntity(fields = "phone", errorPath = "phone", message = "This phone number is already used")
+ * @UniqueEntity(fields = "username", errorPath = "username", message = "username.already_used")
+ * @UniqueEntity(fields = "mail", errorPath = "mail", message = "mail.already_used")
+ * @UniqueEntity(fields = "phone", errorPath = "phone", message = "phone.already_used")
  */
 class Member implements UserInterface, \Serializable
 {

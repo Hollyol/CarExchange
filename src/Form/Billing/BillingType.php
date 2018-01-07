@@ -30,7 +30,7 @@ class BillingType extends AbstractType
 					'choices' => array(
 						'hour' => 'hour',
 						'day' => 'day',
-						'month' => 'day',
+						'month' => 'month',
 						'year' => 'year',
 					),
 				)

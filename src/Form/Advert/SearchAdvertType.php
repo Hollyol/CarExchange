@@ -23,9 +23,8 @@ class SearchAdvertType extends AbstractAdvertType
 	{
 		$optionsSetter = new OptionsSetter();
 
-		$optionsSetter->setOptions($builder, 'car', []);
-
-		$optionsSetter->setOptions($builder, 'location', [], SearchLocationType::class);
+		$optionsSetter->setOptions($builder, 'car', ['translation_domain' => 'searchAdvert'], SearchCarType::class);
+		$optionsSetter->setOptions($builder, 'location', ['translation_domain' => 'searchAdvert'], SearchLocationType::class);
 		
 		$builder
 			->remove('title')

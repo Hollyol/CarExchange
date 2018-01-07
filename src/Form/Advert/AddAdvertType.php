@@ -7,7 +7,7 @@ use App\Form\Car\AddCarType;
 use App\Form\Location\AddLocationType;
 use App\Form\Billing\BillingType;
 
-use App\Services\Form\OptionsSetter;
+use App\Service\Form\OptionsSetter;
 
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -26,6 +26,10 @@ class AddAdvertType extends AbstractAdvertType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
 	{
+		$optionsSetter = new OptionsSetter();
+
+		$optionsSetter->setOptions($builder, 'location', ['translation_domain' => 'addLocation'], AddLocationType::class);
+		$optionsSetter->setOptions($builder, 'car', ['translation_domain' => 'addCar'], AddCarType::class);
     }
     
     /**

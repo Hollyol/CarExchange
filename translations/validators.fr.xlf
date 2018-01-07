@@ -21,6 +21,21 @@
 				<source>sits.lesser_than_one</source>
 				<target>Une voiture à au moins un siège.</target>
 			</trans-unit>
+
+			<trans-unit id = "5">
+				<source>username.already_used</source>
+				<target>Ce pseudo est déjà utilisé.</target>
+			</trans-unit>
+
+			<trans-unit id = "6">
+				<source>phone.already_used</source>
+				<target>Ce numero de téléphone est déjà utilisé.</target>
+			</trans-unit>
+
+			<trans-unit id = "7">
+				<source>mail.already_used</source>
+				<target>Cette adresse e-mail est déjà utilisée.</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

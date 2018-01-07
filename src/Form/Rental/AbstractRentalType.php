@@ -71,6 +71,4 @@ class AbstractRentalType extends AbstractType
     {
         return 'app_abstractRental';
     }
-
-
 }
