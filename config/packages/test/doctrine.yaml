@@ -2,5 +2,8 @@ doctrine:
     dbal:
         host: localhost
         password: KillMe
+            #the following is ignored
         dbname: "car_exchange2"
+            #this one sets corectly the name of the database
+            #(first character is ignored)
         url: "ccar_exchange2"
