@@ -6,6 +6,9 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Member;
 use App\Entity\Advert;
 
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
+
 /**
  * Rental
  *
@@ -26,12 +29,16 @@ class Rental
 	/**
 	 * @ORM\ManyToOne(targetEntity="App\Entity\Advert", inversedBy="rentals")
 	 * @ORM\JoinColumn(nullable = false)
+	 *
+	 * @Assert\Valid()
 	 */
 	private $advert;
 
 	/**
 	 * @ORM\ManyToOne(targetEntity="App\Entity\Member", inversedBy="rentals")
 	 * @ORM\JoinColumn(nullable = false)
+	 *
+	 * @Assert\Valid()
 	 */
 	private $renter;
 
@@ -39,6 +46,9 @@ class Rental
      * @var \DateTime
      *
      * @ORM\Column(name="beginDate", type="datetime")
+	 *
+	 * @Assert\GreaterThanOrEqual(value="today", message = "date.in_past")
+	 * @Assert\NotBlank()
      */
     private $beginDate;
 
@@ -46,6 +56,9 @@ class Rental
      * @var \DateTime
      *
      * @ORM\Column(name="endDate", type="datetime")
+	 *
+	 * @Assert\GreaterThanOrEqual(value="today", message = "date.in_past")
+	 * @Assert\NotBlank();
      */
     private $endDate;
 
@@ -53,8 +66,12 @@ class Rental
 	 * @var string
 	 *
 	 * @ORM\Column(name="status", type="string", length = 25, nullable=false)
+	 *
+	 * @Assert\Length(max="25")
 	 */
 	private $status;
+
+	//CUSTOMS
 
 	/**
 	 * Build Entity
@@ -64,6 +81,36 @@ class Rental
 		$this->beginDate = new \DateTime();
 		$this->endDate = new \DateTime();
 		$this->status = 'nothing';
+	}
+
+	//VALIDATION CALLBACKS
+
+	/**
+	 * Check that dates are in the correct order
+	 *
+	 * @Assert\Callback
+	 */
+	public function validateEndDate(ExecutionContextInterface $context, $payload)
+	{
+		if ($this->getBeginDate() > $this->getEndDate()) {
+			$context->buildViolation('date.negative_duration')
+				->atPath('endDate')
+				->addViolation();
+		}
+	}
+
+	/**
+	 * Check that the advert is available during the given period
+	 *
+	 * @Assert\Callback
+	 */
+	public function validateAvailability(ExecutionContextInterface $context, $payload)
+	{
+		if ($this->getAdvert()->isRented($this->getBeginDate(), $this->getEndDate())) {
+			$context->buildViolation('advert.already_rented')
+				->atPath('beginDate')
+				->addViolation();
+		}
 	}
 
     /**

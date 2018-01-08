@@ -6,7 +6,6 @@ use App\Entity\Location;
 
 /**
  * LocationRepository
- *
  */
 class LocationRepository extends \Doctrine\ORM\EntityRepository
 {

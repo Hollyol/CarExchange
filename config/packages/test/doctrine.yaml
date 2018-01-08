@@ -1,0 +1,6 @@
+doctrine:
+    dbal:
+        host: localhost
+        password: KillMe
+        dbname: "car_exchange2"
+        url: "ccar_exchange2"
