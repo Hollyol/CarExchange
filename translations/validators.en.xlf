@@ -9,32 +9,42 @@
 
 			<trans-unit id = "2">
 				<source>date.negative_duration</source>
-				<target>A duration cannot be negative.</target>
+				<target>A duration cannot be negative</target>
 			</trans-unit>
 
 			<trans-unit id = "3">
 				<source>title.too_long</source>
-				<target>This title is too long.</target>
+				<target>This title is too long</target>
 			</trans-unit>
 
 			<trans-unit id = "4">
 				<source>sits.lesser_than_one</source>
-				<target>There is at least one sit in a car.</target>
+				<target>There is at least one sit in a car</target>
 			</trans-unit>
 
 			<trans-unit id = "5">
 				<source>username.already_used</source>
-				<target>This pseudo is already used.</target>
+				<target>This pseudo is already used</target>
 			</trans-unit>
 
 			<trans-unit id = "6">
 				<source>phone.already_used</source>
-				<target>This phone number is already used.</target>
+				<target>This phone number is already used</target>
 			</trans-unit>
 
 			<trans-unit id = "7">
 				<source>mail.already_used</source>
-				<target>This mail address is already used.</target>
+				<target>This mail address is already used</target>
+			</trans-unit>
+
+			<trans-unit id = "8">
+				<source>advert.already_rented</source>
+				<target>This advert is already rented during this period</target>
+			</trans-unit>
+
+			<trans-unit id = "9">
+				<source>advert.not_available</source>
+				<target>This advert is not available during this period</target>
 			</trans-unit>
 		</body>
 	</file>

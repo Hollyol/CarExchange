@@ -111,6 +111,12 @@ class Rental
 				->atPath('beginDate')
 				->addViolation();
 		}
+
+		if (!$this->getAdvert()->isValid($this->getBeginDate(), $this->getEndDate())) {
+			$context->buildViolation('advert.not_available')
+				->atPath('beginDate')
+				->addViolation();
+		}
 	}
 
     /**

@@ -3,7 +3,7 @@ doctrine:
         host: localhost
         password: KillMe
             #the following is ignored
-        dbname: "car_exchange2"
+        dbname: "car_exchange2_test"
             #this one sets corectly the name of the database
             #(first character is ignored)
-        url: "ccar_exchange2"
+        url: "ccar_exchange2_test"

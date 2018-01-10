@@ -141,6 +141,26 @@ class Advert
 		return false;
 	}
 
+	/**
+	 * Check if advert is valid
+	 *
+	 * @param \Datetime $beginDate
+	 * @param \Datetime $endDate
+	 *
+	 * @return bool
+	 */
+	public function isValid(\Datetime $beginDate, \Datetime $endDate)
+	{
+		if ($this->beginDate < $beginDate
+			AND $beginData < $this->endDate
+			AND $this->beginDate < $endDate
+			AND $this->endDate > $endDate) {
+			return true;
+		}
+
+		return false;
+	}
+
 	//LIFECYCLE_CALLBACKS
 
 	/**

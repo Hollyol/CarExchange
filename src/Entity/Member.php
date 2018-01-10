@@ -86,7 +86,6 @@ class Member implements UserInterface, \Serializable
 	/**
 	 * @var array
 	 *
-	 * @Assert\Regex("^ROLE_[A-Z]+")
 	 * @ORM\Column(name="roles", type="array", length=50)
 	 */
 	private $roles;

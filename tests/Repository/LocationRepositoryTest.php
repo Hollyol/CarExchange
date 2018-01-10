@@ -13,9 +13,6 @@ class LocationRepositoryTest extends KernelTestCase
 	 */
 	private $em;
 
-	/**
-	 * {@inheritDoc}
-	 */
 	protected function setUp()
 	{
 		$kernel = self::bootKernel();
@@ -23,9 +20,20 @@ class LocationRepositoryTest extends KernelTestCase
 		$this->em = $kernel->getContainer()
 			->get('doctrine')
 			->getManager();
+
+		$this->createDataSet();
 	}
 
-	/*
+	protected function tearDown()
+	{
+		$this->cleanDataSet();
+		parent::tearDown();
+
+		$this->em->close();
+		$this->em = null;
+	}
+
+	/**
 	 * If the location is already in the database, alreadyExists will return
 	 * the existing location
 	 */
@@ -45,7 +53,7 @@ class LocationRepositoryTest extends KernelTestCase
 		$this->assertSame($location->getTown(), $result->getTown());
 	}
 
-	/*
+	/**`
 	 * If the location is not already in the database, alreadyExists will return
 	 * the location used as argument
 	 */
@@ -61,5 +69,25 @@ class LocationRepositoryTest extends KernelTestCase
 			->alreadyExists($location);
 
 		$this->assertSame($location, $result);
+	}
+
+	private function createDataSet()
+	{
+		$location = new Location();
+		$location->setCountry('FR');
+		$location->setState('Alsace');
+		$location->setTown('Strasbourg');
+
+		$this->em->persist($location);
+		$this->em->flush();
+	}
+
+	private function cleanDataSet()
+	{
+		$qb = $this->em->createQueryBuilder('l');
+		$qb->delete()
+			->from(Location::class, 'l');
+
+		$qb->getQuery()->execute();
 	}
 }

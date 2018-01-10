@@ -17,11 +17,11 @@ class AdvertRepository extends \Doctrine\ORM\EntityRepository
 		$qb = $this->createQueryBuilder('a');
 		
 		$this->hasValidPeriod($qb, $advertType->getBeginDate(), $advertType->getEndDate());
-		$this->hasValidRentalPeriods($qb, $advertType->getBeginDate(), $advertType->getEndDate());
 		$this->whereCarLike($qb, $advertType->getCar());
 		$this->whereCountryIs($qb, $advertType->getLocation()->getCountry());
 		$this->whereStateIs($qb, $advertType->getLocation()->getState());
 		$this->whereTownIs($qb, $advertType->getLocation()->getTown());
+		//$this->hasValidRentalPeriods($qb, $advertType->getBeginDate(), $advertType->getEndDate());
 
 		return $qb->getQuery()->getResult();
 	}
@@ -31,20 +31,27 @@ class AdvertRepository extends \Doctrine\ORM\EntityRepository
 			throw new PreconditionRequiredHttpException('You must provide begin and end dates');
 
 		$qb
-			->andWhere('a.beginDate < :beginDate')
-			->andWhere('a.endDate > :endDate')
-			->setParameter('beginDate', $beginDate)
-			->setParameter('endDate', $endDate)
+			->andWhere('a.beginDate < :advert_beginDate')
+			->andWhere('a.endDate > :advert_endDate')
+			->setParameter('advert_beginDate', $beginDate)
+			->setParameter('advert_endDate', $endDate)
 		;
 	}
 
-	public function hasValidRentalPeriods(QueryBuilder $qb, $beginDate, $endDate){
+	public function hasValidRentalPeriods(QueryBuilder $qb, \Datetime $beginDate, $endDate){
 		if (!$beginDate OR !$endDate)
 			throw new PreconditionRequiredHttpException('You must provide begin and end dates');
+
 		$qb
 			->leftJoin('a.rentals', 'rental', 'WITH NOT',
-				'((:beginDate BETWEEN rental.beginDate AND rental.endDate)
-				OR (:endDate BETWEEN rental.beginDate AND rental.endDate))')
+				'(
+					(rental.beginDate < :beginDate AND :beginDate < rental.endDate)
+					OR (rental.beginDate < :endDate AND :endDate < rental.endDate)
+					OR (:beginDate < rental.beginDate AND rental.endDate < :endDate)
+					)'
+			)
+				//beginDate MUST NOT be during a rental
+
 			->setParameter('beginDate', $beginDate)
 			->setParameter('endDate', $endDate)
 		;
@@ -64,11 +71,12 @@ class AdvertRepository extends \Doctrine\ORM\EntityRepository
 	}
 
 	public function whereCountryIs(QueryBuilder $qb, $country){
-		if ($country){
-			$qb
-				->innerJoin('a.location', 'location', 'WITH', 'location.country = :country')
-				->setParameter('country', $country);
-		}
+		if (!$country)
+			throw new PreconditionRequiredHttpException('You must provide the country');
+
+		$qb
+			->innerJoin('a.location', 'location', 'WITH', 'location.country = :country')
+			->setParameter('country', $country);
 	}
 
 	public function whereStateIs(QueryBuilder $qb, $state){

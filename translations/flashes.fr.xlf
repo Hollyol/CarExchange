@@ -23,8 +23,8 @@
 			</trans-unit>
 
 			<trans-unit id = "5">
-				<source>advert.already_rented</source>
-				<target>Cette voiture est dèjà louée pendant cette période</target>
+				<source>rental.ask_success</source>
+				<target>La demande de location a bien ete envoyée.</target>
 			</trans-unit>
 		</body>
 	</file>

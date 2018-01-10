@@ -23,8 +23,8 @@
 			</trans-unit>
 
 			<trans-unit id = "5">
-				<source>advert.already_rented</source>
-				<target>This car is already rented during this period</target>
+				<source>rental.ask_success</source>
+				<target>The request for this rental has been sent.</target>
 			</trans-unit>
 		</body>
 	</file>
