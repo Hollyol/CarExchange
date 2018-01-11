@@ -152,7 +152,7 @@ class Advert
 	public function isValid(\Datetime $beginDate, \Datetime $endDate)
 	{
 		if ($this->beginDate < $beginDate
-			AND $beginData < $this->endDate
+			AND $beginDate < $this->endDate
 			AND $this->beginDate < $endDate
 			AND $this->endDate > $endDate) {
 			return true;

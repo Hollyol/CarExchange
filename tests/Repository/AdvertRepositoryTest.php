@@ -38,18 +38,6 @@ class AdvertRepositoryTest extends KernelTestCase
 	}
 
 	/**
-	 * @dataProvider advertDateProvider
-	 */
-	public function testHasValidPeriod($beginDate, $endDate, $expected)
-	{
-		$repos = $this->em->getRepository(Advert::class);
-		$qb = $repos->createQueryBuilder('a');
-		$repos->hasValidPeriod($qb, $beginDate, $endDate);
-
-		$this->assertCount($expected, $qb->getQuery()->getResult());
-	}
-
-	/**
 	 * @dataProvider carProvider
 	 */
 	public function testWhereCarLike(Car $car, int $expected)
@@ -66,12 +54,10 @@ class AdvertRepositoryTest extends KernelTestCase
 	 */
 	public function testHasValidRentalPeriods($beginDate, $endDate, int $expected)
 	{
-	//	$this->markTestSkipped('Fuuuuuuuuuck');
 		$repos = $this->em->getRepository(Advert::class);
 		$qb = $repos->createQueryBuilder('a');
-		$repos->hasValidRentalPeriods($qb, $beginDate, $endDate);
+		$repos->hasValidPeriod($qb, $beginDate, $endDate);
 
-		$result = $qb->getQuery()->getResult();
 		$this->assertCount($expected, $qb->getQuery()->getResult());
 	}
 
@@ -88,7 +74,16 @@ class AdvertRepositoryTest extends KernelTestCase
 		$repos->whereStateIs($qb, $state);
 		$repos->whereTownIs($qb, $town);
 
-		$this->assertCount($expected, $qb->getQuery()->getResult());
+		$result = $qb->getQuery()->getResult();
+
+		if (count($result) == 1) {
+			$this->assertEquals('An other title', $result[0]->getTitle());
+		} else if (count($result) == 2) {
+			$this->assertEquals('A Great Title', $result[0]->getTitle());
+			$this->assertEquals('An other title', $result[1]->getTitle());
+		}
+
+		$this->assertCount($expected, $result);
 	}
 
 	private function createDataSet()
@@ -118,8 +113,8 @@ class AdvertRepositoryTest extends KernelTestCase
 		$billing_1->setTimeBase('day');
 
 		$rental_1 = new Rental();
-		$rental_1->setBeginDate(new \Datetime('2018-04-03'));
-		$rental_1->setEndDate(new \Datetime('2018-04-10'));
+		$rental_1->setBeginDate(new \Datetime('2018-04-12'));
+		$rental_1->setEndDate(new \Datetime('2018-04-16'));
 		$rental_1->setRenter($renter_1);
 		$rental_1->setStatus('asking');
 
@@ -138,7 +133,7 @@ class AdvertRepositoryTest extends KernelTestCase
 
 		$advert_1 = new Advert();
 		$advert_1->setTitle('A Great Title');
-		$advert_1->setBeginDate(new \Datetime('2018-04-01'));
+		$advert_1->setBeginDate(new \Datetime('2018-01-01'));
 		$advert_1->setEndDate(new \Datetime('2019-05-01'));
 		$advert_1->setLocation($location_1);
 		$advert_1->setCar($car_1);
@@ -152,7 +147,7 @@ class AdvertRepositoryTest extends KernelTestCase
 
 		$advert_2 = new Advert();
 		$advert_2->setTitle('An other title');
-		$advert_2->setBeginDate(new \Datetime('2018-04-10'));
+		$advert_2->setBeginDate(new \Datetime('2018-01-10'));
 		$advert_2->setEndDate(new \Datetime('2019-05-10'));
 		$advert_2->setLocation($location_1);
 		$advert_2->setCar($car_2);
@@ -227,22 +222,6 @@ class AdvertRepositoryTest extends KernelTestCase
 		);
 	}
 
-	public function advertDateProvider()
-	{
-		return array(
-			'matching' => [
-				new \Datetime('2018-04-10'),
-				new \Datetime('2018-04-20'),
-				1,
-			],
-			'not matching' => [
-				new \Datetime('2023-02-23'),
-				new \Datetime('2023-02-28'),
-				0,
-			],
-		);
-	}
-
 	public function carProvider()
 	{
 		return array(
@@ -300,29 +279,34 @@ class AdvertRepositoryTest extends KernelTestCase
 	public function rentalDateProvider()
 	{
 		return array(
+			'out of validity range' => [
+				new \Datetime('2015-03-01'),
+				new \Datetime('2015-03-20'),
+				0,
+			],
 			'beginDate in a rental' => [
-				new \Datetime('2018-04-05'),
-				new \Datetime('2018-04-12'),
+				new \Datetime('2018-04-13'),
+				new \Datetime('2018-04-18'),
 				1,
 			],
 			'endDate in a reantal' => [
-				new \Datetime('2018-04-12'),
-				new \Datetime('2018-06-12'),
+				new \Datetime('2018-04-10'),
+				new \Datetime('2018-04-15'),
 				1,
 			],
 			'both in same rental' => [
-				new \Datetime('2018-06-05'),
-				new \Datetime('2018-06-12'),
+				new \Datetime('2018-04-13'),
+				new \Datetime('2018-04-15'),
 				1,
 			],
 			'both in different rentals' => [
-				new \Datetime('2018-04-05'),
+				new \Datetime('2018-04-13'),
 				new \Datetime('2018-06-12'),
 				1,
 			],
 			'including a rental' => [
-				new \Datetime('2018-04-01'),
-				new \Datetime('2018-04-23'),
+				new \Datetime('2018-04-10'),
+				new \Datetime('2018-04-20'),
 				1,
 			],
 			'both before any rentals' => [

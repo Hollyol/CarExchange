@@ -76,7 +76,7 @@ class AdvertsController extends Controller
 			$em->persist($rental);
 			$em->flush();
 
-			$this->addFlash('uhome', 'rental.aks_success');
+			$this->addFlash('uhome', 'rental.ask_success');
 			return $this->redirectToRoute('app_users.home');
 		}
 

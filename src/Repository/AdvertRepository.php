@@ -21,39 +21,31 @@ class AdvertRepository extends \Doctrine\ORM\EntityRepository
 		$this->whereCountryIs($qb, $advertType->getLocation()->getCountry());
 		$this->whereStateIs($qb, $advertType->getLocation()->getState());
 		$this->whereTownIs($qb, $advertType->getLocation()->getTown());
-		//$this->hasValidRentalPeriods($qb, $advertType->getBeginDate(), $advertType->getEndDate());
 
 		return $qb->getQuery()->getResult();
 	}
 
-	public function hasValidPeriod(QueryBuilder $qb, $beginDate, $endDate){
+	public function hasValidPeriod(QueryBuilder $qb, \Datetime $beginDate, $endDate){
 		if (!$beginDate OR !$endDate)
 			throw new PreconditionRequiredHttpException('You must provide begin and end dates');
 
 		$qb
-			->andWhere('a.beginDate < :advert_beginDate')
-			->andWhere('a.endDate > :advert_endDate')
-			->setParameter('advert_beginDate', $beginDate)
-			->setParameter('advert_endDate', $endDate)
-		;
-	}
+			//adverts must be active during the provided period
+			->where('a.beginDate < :beginDate')
+			->andWhere('a.endDate > :endDate')
+			//adverts MUST NOT have any rentals colliding the provided or not having rentals
+			//cases of collision :
+			//	beginDate during the rental period
+			//	endDate during the rental period
+			//	rental period included by the provided period
+			->andWhere('NOT EXISTS (SELECT r.status FROM App\Entity\Rental r WHERE (
+				(r.beginDate < :endDate AND :endDate < r.endDate)
+				OR (r.beginDate < :beginDate AND :beginDate < r.endDate)
+				OR (:beginDate < r.beginDate AND r.endDate < :endDate)))
+				OR a.rentals IS EMPTY')
 
-	public function hasValidRentalPeriods(QueryBuilder $qb, \Datetime $beginDate, $endDate){
-		if (!$beginDate OR !$endDate)
-			throw new PreconditionRequiredHttpException('You must provide begin and end dates');
-
-		$qb
-			->leftJoin('a.rentals', 'rental', 'WITH NOT',
-				'(
-					(rental.beginDate < :beginDate AND :beginDate < rental.endDate)
-					OR (rental.beginDate < :endDate AND :endDate < rental.endDate)
-					OR (:beginDate < rental.beginDate AND rental.endDate < :endDate)
-					)'
-			)
-				//beginDate MUST NOT be during a rental
-
-			->setParameter('beginDate', $beginDate)
-			->setParameter('endDate', $endDate)
+			->setParameter('beginDate', $beginDate->format('Y-m-d H:i:s'))
+			->setParameter('endDate', $endDate->format('Y-m-d H:i:s'))
 		;
 	}
 
