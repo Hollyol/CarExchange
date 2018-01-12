@@ -17,12 +17,13 @@ class AbstractLocationTypeTest extends TypeTestCase
 			'town' => 'Strasbourg',
 		);
 
-		$form = $this->factory->create(AbstractLocationType::class);
 
 		$location = new Location();
 		$location->setCountry($formData['country']);
 		$location->setState($formData['state']);
 		$location->setTown($formData['town']);
+
+		$form = $this->factory->create(AbstractLocationType::class);
 
 		$form->submit($formData);
 		$this->assertTrue($form->isSynchronized());

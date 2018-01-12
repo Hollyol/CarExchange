@@ -9,10 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-use Symfony\Component\Validator\Context\ExecutionContextInterface;
-use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\GreaterThanOrEqual;
-use Symfony\Component\Validator\Constraints\Callback;
 
 class AbstractRentalType extends AbstractType
 {
@@ -21,35 +18,18 @@ class AbstractRentalType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-		$positiveDuration = new Callback(array(
-			'callback' => function ($endDate, ExecutionContextInterface $context) {
-				if ($endDate < $context->getRoot()->getData()->getBeginDate()){
-					$context->buildViolation('rental.negative_duration')
-						->atPath('endDate')
-						->addViolation()
-					;
-				}
-			}
+		$futureDate = new GreaterThanOrEqual(array(
+			'value' => new \Datetime('today'),
+			'message' => 'date.in_past',
 		));
 
-		$futureDate = new GreaterThanOrEqual(array("value" => "today",
-			"message" => "date.in_past"));
-
 		$builder
-			->add('beginDate', DateType::class,
-				array(
-					'constraints' => array(
-						new NotBlank,
-						$futureDate
-					),
-				))
-			->add('endDate', DateType::class,
-				array(
-					'constraints' => array(
-						new NotBlank,
-						$positiveDuration,
-					),
-				))
+			->add('beginDate', DateType::class, array(
+				'constraints' => $futureDate,
+			))
+			->add('endDate', DateType::class, array(
+				'constraints' => $futureDate,
+			))
 			->add('submit', SubmitType::class)
 		;
     }

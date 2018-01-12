@@ -9,6 +9,7 @@ use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Validator\Constraints\GreaterThanOrEqual;
 
 use App\Form\Car\AbstractCarType;
 use App\Form\Location\AbstractLocationType;
@@ -23,12 +24,21 @@ class AbstractAdvertType extends AbstractType
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
+		$futureDate = new GreaterThanOrEqual(array(
+			'value' => new \Datetime('today'),
+			'message' => 'date.in_past',
+		));
+
 		$builder
 			->add('title', TextType::class, array(
 				'required' => false,
 			))
-			->add('beginDate', DateType::class)
-			->add('endDate', DateType::class)
+			->add('beginDate', DateType::class, array(
+				'constraints' => $futureDate,
+			))
+			->add('endDate', DateType::class, array(
+				'constraints' => $futureDate,
+			))
 			->add('car', AbstractCarType::class, array(
 				'translation_domain' => 'addCar'
 			))

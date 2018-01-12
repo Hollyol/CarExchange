@@ -71,7 +71,6 @@ class Advert
      * @var \DateTime
      *
      * @ORM\Column(name="beginDate", type="datetime")
-	 * @Assert\GreaterThanOrEqual(value = "today", message = "date.in_past")
 	 * @Assert\NotBlank()
      */
     private $beginDate;
@@ -80,7 +79,6 @@ class Advert
      * @var \DateTime
      *
 	 * @ORM\Column(name="endDate", type="datetime")
-	 * @Assert\GreaterThanOrEqual(value = "today", message = "date.in_past")
 	 * @Assert\NotBlank()
      */
     private $endDate;
