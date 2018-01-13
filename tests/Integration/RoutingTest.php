@@ -6,12 +6,52 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class RoutingTest extends WebTestCase
 {
+	protected static $client;
+
+	public static function setUpBeforeClass()
+	{
+		self::$client = static::createClient();
+	}
+
+	public static function tearDownAfterClass()
+	{
+		parent::tearDownAfterClass();
+	}
+
 	public function testHomeRoute()
 	{
-		$client = static::createClient();
+		self::$client->request('GET', '/en/');
+		$this->assertEquals(200, self::$client->getResponse()->getStatusCode());
+		self::$client->request('GET', '/fr/');
+		$this->assertEquals(200, self::$client->getResponse()->getStatusCode());
+		self::$client->request('GET', '/en');
+		$this->assertEquals(301, self::$client->getResponse()->getStatusCode());
+		self::$client->request('GET', '/fr');
+		$this->assertEquals(301, self::$client->getResponse()->getStatusCode());
+	}
 
-		$crawler = $client->request('GET', '/en/');
+	public function testSignupRoute()
+	{
+		self::$client->request('GET', '/en/users/signup/');
+		$this->assertEquals(200, self::$client->getResponse()->getStatusCode());
+		self::$client->request('GET', '/fr/users/signup/');
+		$this->assertEquals(200, self::$client->getResponse()->getStatusCode());
+		self::$client->request('GET', '/en/users/signup');
+		$this->assertEquals(301, self::$client->getResponse()->getStatusCode());
+		self::$client->request('GET', '/en/users/signup');
+		$this->assertEquals(301, self::$client->getResponse()->getStatusCode());
+	}
 
-		$this->assertEquals(200, $client->getResponse()->getStatusCode(), var_dump($crawler->filter('title')));
+	public function testLogoutRedirection()
+	{
+		self::$client->request('GET', '/en/logout');
+		$this->assertEquals(302, self::$client->getResponse()->getStatusCode());
+		$this->assertTrue(self::$client->getResponse()->isRedirect());
+	}
+
+	public function testLoginRoute()
+	{
+		self::$client->request('GET', '/en/login');
+		$this->assertEquals(200, self::$client->getResponse()->getStatusCode());
 	}
 }
