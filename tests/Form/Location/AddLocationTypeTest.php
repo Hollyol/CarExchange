@@ -2,7 +2,7 @@
 
 namespace App\Tests\Form\Location;
 
-use Symfony\Component\Form\Test\TypeTestCase;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Form\PreloadedExtension;
 
 use Doctrine\ORM\EntityManager;
@@ -10,13 +10,22 @@ use Doctrine\ORM\EntityManager;
 use App\Form\Location\AddLocationType;
 use App\Entity\Location;
 
-class AddLocationTypeTest extends TypeTestCase
+class AddLocationTypeTest extends KernelTestCase
 {
 	private $em;
+	private $formFactory;
 
 	public function setUp()
 	{
-		$this->em = $this->createMock(EntityManager::class);
+		$container = self::bootKernel()
+			->getContainer();
+
+		$this->formFactory = $container
+			->get('form.factory');
+
+		$this->em = $container
+			->get('doctrine')
+			->getManager();
 	}
 
 	public function getExtensions()
@@ -42,7 +51,7 @@ class AddLocationTypeTest extends TypeTestCase
 		$location->setState($formData['state']);
 		$location->setTown($formData['town']);
 
-		$form = $this->factory->create(AddLocationType::class);
+		$form = $this->formFactory->createBuilder(AddLocationType::class)->getForm();
 
 		$form->submit($formData);
 		$this->assertTrue($form->isSynchronized());
