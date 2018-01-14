@@ -4,7 +4,9 @@
 	{{ parent() }} - Chercher une voiture
 {% endblock %}
 
-{% block style %}
+{% block stylesheets %}
+{{ parent() }}
+<style>
 	#map_canva {
 		height: 600px;
 		width: 50%;
@@ -20,6 +22,7 @@
 		padding-top: 30px;
 		display :flex;
 	}
+</style>
 {% endblock %}
 
 {% block scripts %}

@@ -49,7 +49,7 @@
 
 			<trans-unit id = "10">
 				<source>Town</source>
-				<target>Vile :</target>
+				<target>Ville :</target>
 			</trans-unit>
 
 			<trans-unit id = "11">

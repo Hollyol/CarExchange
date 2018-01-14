@@ -36,7 +36,8 @@ class SearchLocationType extends AbstractLocationType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'App\Entity\Location'
+			'data_class' => 'App\Entity\Location',
+			'translation_domain' => 'searchAdvert',
         ));
     }
 

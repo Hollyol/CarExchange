@@ -7,32 +7,16 @@
 			CarExchange
 			{% endblock %}
 		</title>
-		<style>
-			{% block style %}{% endblock %}
-		</style>
-		{% block scripts %}{% endblock %}
+		{% block stylesheets %}
+			<link rel="stylesheet" href="/css/layer.css" type="text/css" />
+		{% endblock %}
 	</head>
 
 	<body>
+		{% block scripts %}
+		{% endblock %}
 		<header id='main_header'>
 			<h1>Car Exchange</h1>
-			{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-				<p>Connecté en tant que : <strong>
-				<a href='{{ path('app_users.home') }}'>{{ app.user.username }}</a>
-				</strong></p>
-				<a href='{{ path('app_security.logout') }}'>Deconnexion</a>
-			{% endif %}
-
-			<form action = '{{ path('app_language') }}' method = 'post'>
-				<select	name='language'>
-					<option value = 'en'>English</option>
-					<option value = 'fr'>Français</option>
-				</select>
-
-				<input name = 'url' type = 'hidden' value = '{{ app.request.uri }}' />
-
-				<input type = 'submit' value = 'Submit' />
-			</form>
 
 			<nav class='main_links'>
 				<a href='#'>Infos</a>
@@ -46,6 +30,24 @@
 			<nav class='meta_links'>
 				{% block links %}{% endblock %}
 			</nav>
+
+			<form action = '{{ path('app_language') }}' method = 'post' id='language'>
+				<select	name='language'>
+					<option value = 'en'>English</option>
+					<option value = 'fr'>Français</option>
+				</select>
+
+				<input name = 'url' type = 'hidden' value = '{{ app.request.uri }}' />
+
+				<input type = 'submit' value = 'Envoyer' />
+			</form>
+
+			{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+				<p>Connecté en tant que : <strong>
+				<a href='{{ path('app_users.home') }}'>{{ app.user.username }}</a>
+				</strong>
+				<a href='{{ path('app_security.logout') }}'>Deconnexion</a></p>
+			{% endif %}
 		</header>
 
 		<div class='content'>
@@ -57,8 +59,10 @@
 
 		<footer id='main_footer'>
 			{% block footer %}{% endblock %}
-			<p>Copyright blablabla. Touts droits réservés...<br />
-			<a href='{{path('app_core.home') }}'>Accueil</a></p>
+			<div id='generic_footing'>
+				<p>Copyright blablabla. Touts droits réservés...</p>
+				<a href='{{path('app_core.home') }}'>Accueil</a>
+			</div>
 		</footer>
 
 	</body>
