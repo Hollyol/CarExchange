@@ -5,55 +5,14 @@
 {% endblock %}
 
 {% block stylesheets %}
-{{ parent() }}
-<style>
-	#map_canva {
-		height: 600px;
-		width: 50%;
-	}
-
-	#results_adverts {
-		width: 50%;
-		height: 600px;
-		overflow: scroll;
-	}
-
-	#results {
-		padding-top: 30px;
-		display :flex;
-	}
-</style>
+	{{ parent() }}
+	<link rel="stylesheet" type="text/css" href="/css/searchAdvert.css" />
 {% endblock %}
 
 {% block scripts %}
-<script type = 'text/javascript'>
-	function initMap() {
-		geocoder = new google.maps.Geocoder();
+<script src="/js/initMap.js" type = 'text/javascript'></script>
 
-		var location = {lat: 48.859, lng: 2.346};
-		map = new google.maps.Map(document.getElementById('map_canva'), {
-			zoom: 5,
-			center: location
-		});
-	}
-</script>
-
-<script type='text/javascript'>
-	function putMarker(address) {
-		geocoder.geocode({
-			'address': address
-			}, function(results, status) {
-			if (status == 'OK') {
-				var marker = new google.maps.Marker({
-					map: map,
-					position: results[0].geometry.location
-				});
-			} else {
-				alert('Geocode failed because ' + status);
-			}
-		});
-	}
-</script>
+<script src="/js/putMarker.js" type='text/javascript'></script>
 
 <script>
 	{% if count %}
@@ -71,7 +30,7 @@
 
 {% block flashes %}
 	{% for message in app.flashes('asearch') %}
-		{{ message|trans({}, 'flashes') }}<br />
+		<p class = 'flash_message'>{{ message|trans({}, 'flashes') }}</p>
 	{% endfor %}
 {% endblock %}
 
@@ -83,18 +42,19 @@
 		{{ form(form) }}
 	</fieldset>
 
+	{% if app.request.method == "POST" %}
 	<div id='results'>
-	<div id='results_adverts'>
-	<fieldset>
-		<h2>{{ 'adverts.result_plurals'|transchoice(count, [], 'searchAdvert') }}</h2>
+		<div id='results_adverts'>
+		<fieldset>
+			<legend><h2>{{ 'adverts.result_plurals'|transchoice(count, [], 'searchAdvert') }}</h2></legend>
 		
-		{% include 'fr/adverts/adverts.html.twig' with{'adverts': listAdverts } %}	
-	</fieldset>
-	</div>
+			{% include 'fr/adverts/adverts.html.twig' with{'adverts': listAdverts } %}	
+		</fieldset>
+		</div>
 
-	<div id = 'map_canva'>
-		<h6>Chargement de la carte...</h6>
+		<div id = 'map_canva'>
+			<h6>Chargement de la carte...</h6>
+		</div>
 	</div>
-
-	</div>
+	{% endif %}
 {% endblock %}

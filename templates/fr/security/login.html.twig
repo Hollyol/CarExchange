@@ -8,7 +8,7 @@
 
 {% block flashes %}
 	{% for message in app.flashes('usignin') %}
-		<p>{{ message|trans({}, 'flashes') }}</p>
+		<p class = 'flash_message'>{{ message|trans({}, 'flashes') }}</p>
 	{% endfor %}
 {% endblock %}
 
@@ -16,18 +16,21 @@
 	<p>{{ error.messageKey|trans(error.messageData, 'security') }}</p>
 {% endif %}
 
-<form action='{{ path('app_security.login') }}' method='post'>
-	<label for='username'>Pseudo ou E-mail :</label>
-	<input type='text' id='username' name='_username' value='{{ last_username }}' />
-	<br />
-	<label for='password'>Mot de passe :</label>
-	<input type='password' id='password' name='_password' />
+<fieldset>
+	<legend><h2>Se Connecter :</h2></legend>
+	<form action='{{ path('app_security.login') }}' method='post'>
+		<label for='username'>Pseudo ou E-mail :</label>
+		<input type='text' id='username' name='_username' value='{{ last_username }}' />
+		<br />
+		<label for='password'>Mot de passe :</label>
+		<input type='password' id='password' name='_password' />
 
-	{# csrf protection #}
-	<input type='hidden' name='_csrf_token' value = '{{ csrf_token('authenticate') }}' />
-	<br />
-	<button type='submit'>Connexion</button>
-</form>
+			{# csrf protection #}
+		<input type='hidden' name='_csrf_token' value = '{{ csrf_token('authenticate') }}' />
+		<br />
+		<button type='submit'>Connexion</button>
+	</form>
+</fieldset>
 
 <p>Vous n'avez pas encore de compte ? <a href='{{ path('app_users.signup') }}'>Créer un compte</a> !</p>
 

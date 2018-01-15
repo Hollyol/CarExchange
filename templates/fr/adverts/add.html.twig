@@ -6,7 +6,7 @@
 
 {% block flashes %}
 	{% for message in app.flashes('addcar') %}
-		<p>{{ message|trans({}, 'flashes') }}</p>
+		<p class = 'flash_message'>{{ message|trans({}, 'flashes') }}</p>
 	{% endfor %}
 {% endblock %}
 

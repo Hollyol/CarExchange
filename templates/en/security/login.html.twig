@@ -8,7 +8,7 @@
 
 {% block flashes %}
 	{% for message in app.flashes('usignin') %}
-		<p>{{ message|trans({}, 'flashes') }}</p>
+		<p class = 'flash_message'>{{ message|trans({}, 'flashes') }}</p>
 	{% endfor %}
 {% endblock %}
 

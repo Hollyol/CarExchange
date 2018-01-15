@@ -8,7 +8,7 @@
 			{% endblock %}
 		</title>
 		{% block stylesheets %}
-		<link rel="stylesheet" href="/css/layer.css" />
+		<link rel="stylesheet" href="/css/layout.css" />
 		{% endblock %}
 	</head>
 
@@ -43,10 +43,12 @@
 			</form>
 
 			{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+			<aside id = 'user_logged'>
 				<p>Loged as : <strong>
 				<a href='{{ path('app_users.home') }}'>{{ app.user.username }}</a>
-				</strong></p>
-				<a href='{{ path('app_security.logout') }}'>Sign Out</a>
+				</strong>
+				<a href='{{ path('app_security.logout') }}'>Sign Out</a></p>
+			</aside>
 			{% endif %}
 		</header>
 

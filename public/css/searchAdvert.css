@@ -1,0 +1,14 @@
+#map_canva {
+	height: 600px;
+	width: 50%;
+}
+
+#results_adverts {
+	width: 50%;
+	height: 600px;
+	overflow-y: scroll;
+}
+
+#results {
+	display: flex;
+}

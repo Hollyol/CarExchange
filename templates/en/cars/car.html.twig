@@ -1,6 +1,14 @@
-<h5>Brand : {{ car.brand }}<br />
-Model : {{ car.model }}</h5>
-<p>Number of sits : {{ car.sits }}<br />
-Fuel : {{ car.fuel }}</p>
-<p>Description :<br />
-{{ car.description }}</p>
+{% block stylesheets %}
+	<link rel="stylesheet" type="text/css" href="/css/car.css" />
+{% endblock %}
+
+<article class='car_description'>
+	<div class = 'car_specs'>
+		<p>Brand : <strong>{{ car.brand }}</strong><br />
+		Model : <strong>{{ car.model }}</strong></p>
+		<p>Number of sits : {{ car.sits }}<br />
+		Fuel : {{ car.fuel }}</p>
+	</div>
+	<p>Description :<br />
+	{{ car.description }}</p>
+</article>

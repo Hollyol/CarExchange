@@ -6,13 +6,13 @@
 
 {% block flashes %}
 	{% for message in app.flashes('signup') %}
-		<p class='flash'>{{ message }}</p>
+		<p class='flash_message'>{{ message }}</p>
 	{% endfor %}
 {% endblock %}
 
 {% block content %}
 	<fieldset>
-		<legend><h3>Créer un compte :</h3></legend>
+		<legend><h2>Créer un compte :</h2></legend>
 		{{ form(form) }}
 	</fieldset>
 {% endblock %}

@@ -10,7 +10,7 @@
 
 	{% if advert.rentals.count > 0 %}
 	<fieldset>
-		<legend><h5>Already rented during these periods :</h5></legend>
+		<legend>Already rented during these periods :</legend>
 		<p>
 		{% for rental in advert.rentals %}
 			From {{ rental.beginDate|date('d-m-Y') }} to {{ rental.endDate|date('d-m-Y') }}.

@@ -8,7 +8,7 @@
 			{% endblock %}
 		</title>
 		{% block stylesheets %}
-			<link rel="stylesheet" href="/css/layer.css" type="text/css" />
+			<link rel="stylesheet" href="/css/layout.css" type="text/css" />
 		{% endblock %}
 	</head>
 
@@ -31,7 +31,7 @@
 				{% block links %}{% endblock %}
 			</nav>
 
-			<form action = '{{ path('app_language') }}' method = 'post' id='language'>
+			<form action = '{{ path('app_language') }}' method = 'post' id='language_form'>
 				<select	name='language'>
 					<option value = 'en'>English</option>
 					<option value = 'fr'>Français</option>
@@ -43,10 +43,12 @@
 			</form>
 
 			{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-				<p>Connecté en tant que : <strong>
-				<a href='{{ path('app_users.home') }}'>{{ app.user.username }}</a>
-				</strong>
-				<a href='{{ path('app_security.logout') }}'>Deconnexion</a></p>
+				<aside id='user_logged'>
+					<p>Connecté en tant que : <strong>
+					<a href='{{ path('app_users.home') }}'>{{ app.user.username }}</a>
+					</strong>
+					<a href='{{ path('app_security.logout') }}'>Deconnexion</a></p>
+				</aside>
 			{% endif %}
 		</header>
 
