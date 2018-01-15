@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Billing
@@ -25,6 +26,9 @@ class Billing
      * @var string
      *
      * @ORM\Column(name="Currency", type="string", length=10)
+	 *
+	 * @Assert\NotBlank()
+	 * @Assert\Currency()
      */
     private $currency;
 
@@ -32,6 +36,8 @@ class Billing
      * @var int
      *
      * @ORM\Column(name="Price", type="integer")
+	 *
+	 * @Assert\NotBlank();
      */
     private $price;
 
@@ -39,6 +45,9 @@ class Billing
      * @var string
      *
      * @ORM\Column(name="TimeBase", type="string", length=15)
+	 *
+	 * @Assert\NotBlank()
+	 * @Assert\Length(max=15)
      */
     private $timeBase;
 

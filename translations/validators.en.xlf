@@ -46,6 +46,11 @@
 				<source>advert.not_available</source>
 				<target>This advert is not available during this period</target>
 			</trans-unit>
+
+			<trans-unit id = "10">
+				<source>member.empty_location</source>
+				<target>We need to know were you live (this information will be kept secret)</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

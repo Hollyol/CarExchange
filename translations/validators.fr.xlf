@@ -46,6 +46,11 @@
 				<source>advert.not_available</source>
 				<target>Cette voiture n'est pas disponible pendant cette période</target>
 			</trans-unit>
+
+			<trans-unit id = "10">
+				<source>member.empty_location</source>
+				<target>Nous avons besoin de savoir où vous habitez (Cette information sera gardée secrette)</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

@@ -35,6 +35,7 @@ class Advert
 	 * @ORM\JoinColumn(nullable = false)
 	 *
 	 * @Assert\Valid()
+	 * @Assert\NotBlank()
 	 */
 	private $car;
 
@@ -43,6 +44,7 @@ class Advert
 	 * @ORM\JoinColumn(nullable = false)
 	 *
 	 * @Assert\Valid()
+	 * @Assert\NotBlank()
 	 */
 	private $location;
 
@@ -51,6 +53,7 @@ class Advert
 	 * @ORM\JoinColumn(nullable = false)
 	 *
 	 * @Assert\Valid()
+	 * @Assert\NotBlank()
 	 */
 	private $billing;
 
@@ -59,6 +62,7 @@ class Advert
 	 * @ORM\JoinColumn(nullable = false)
 	 *
 	 * @Assert\Valid()
+	 * @Assert\NotBlank()
 	 */
 	private $owner;
 
@@ -87,7 +91,7 @@ class Advert
      * @var string
      *
 	 * @ORM\Column(name="title", type="string", length=100)
-	 * @Assert\Length(max = "99", maxMessage = "title.too_long")
+	 * @Assert\Length(max = "100", maxMessage = "title.too_long")
      */
     private $title;
 
@@ -121,6 +125,11 @@ class Advert
 	public function isRented(\Datetime $beginDate, \Datetime $endDate)
 	{
 		$rentals = $this->getRentals();
+
+		if (!count($rentals)) {
+			return false;
+		}
+
 		foreach($rentals as $rental){
 			if (
 				//If the beginDate is included in a rental

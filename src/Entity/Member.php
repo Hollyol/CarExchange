@@ -42,15 +42,19 @@ class Member implements UserInterface, \Serializable
 	/**
 	 * @ORM\ManyToOne(targetEntity="App\Entity\Location", cascade={"persist"})
 	 * @ORM\JoinColumn(nullable=false)
+	 *
+	 * @Assert\Valid()
+	 * @Assert\NotBlank(message="member.empty_location")
 	 */
 	private $location;
 
 	/**
 	 * @var string
 	 *
-	 * @Assert\Language()
-	 *
 	 * @ORM\Column(name="language", type="string", length=10, nullable=false)
+	 *
+	 * @Assert\Language()
+	 * @Assert\NotBlank()
 	 */
 	private $language;
 
@@ -58,6 +62,9 @@ class Member implements UserInterface, \Serializable
      * @var string
      *
      * @ORM\Column(name="username", type="string", length=50, nullable=false, unique=true)
+	 *
+	 * @Assert\Length(max=50)
+	 * @Assert\NotBlank()
      */
     private $username;
 
@@ -65,6 +72,8 @@ class Member implements UserInterface, \Serializable
      * @var string
      *
      * @ORM\Column(name="password", type="string", length=64, nullable=false)
+	 *
+	 * @Assert\NotBlank()
      */
     private $password;
 
@@ -72,21 +81,26 @@ class Member implements UserInterface, \Serializable
      * @var string
      *
      * @ORM\Column(name="phone", type="string", length=15, unique=true)
+	 *
+	 * @Assert\Length(max=50)
      */
     private $phone;
 
     /**
      * @var string
      *
-	 * @Assert\Email()
      * @ORM\Column(name="mail", type="string", length=100, nullable=false, unique=true)
+	 *
+	 * @Assert\Email()
+	 * @Assert\Length(max=100)
+	 * @Assert\NotBlank()
      */
     private $mail;
 
 	/**
 	 * @var array
 	 *
-	 * @ORM\Column(name="roles", type="array", length=50)
+	 * @ORM\Column(name="roles", type="array")
 	 */
 	private $roles;
 
