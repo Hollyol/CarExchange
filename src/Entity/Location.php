@@ -47,7 +47,6 @@ class Location
 	 * @ORM\Column(name="town", type="string", length=100)
 	 *
 	 * @Assert\Length(max=100)
-	 * @Assert\NotBlank()
      */
     private $town;
 

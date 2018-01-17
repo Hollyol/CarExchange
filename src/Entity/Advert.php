@@ -53,7 +53,6 @@ class Advert
 	 * @ORM\JoinColumn(nullable = false)
 	 *
 	 * @Assert\Valid()
-	 * @Assert\NotBlank()
 	 */
 	private $billing;
 
@@ -62,7 +61,6 @@ class Advert
 	 * @ORM\JoinColumn(nullable = false)
 	 *
 	 * @Assert\Valid()
-	 * @Assert\NotBlank()
 	 */
 	private $owner;
 
@@ -75,6 +73,7 @@ class Advert
      * @var \DateTime
      *
      * @ORM\Column(name="beginDate", type="datetime")
+	 *
 	 * @Assert\NotBlank()
      */
     private $beginDate;
@@ -83,6 +82,7 @@ class Advert
      * @var \DateTime
      *
 	 * @ORM\Column(name="endDate", type="datetime")
+	 *
 	 * @Assert\NotBlank()
      */
     private $endDate;

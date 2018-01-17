@@ -31,16 +31,15 @@ class LayoutIntegrationTest extends WebTestCase
 		//The header must contain one nav with class 'meta_links'
 		$this->assertCount(1, $headerNode->filter('nav.meta_links'));
 
-		$formNode = $headerNode->filterXPath('//form[@id="language_form"]');
-		$this->assertNotEmpty($formNode);
-		//The form must have one choice field
-		$this->assertCount(1, $formNode->filterXPath('//select[@name="language"]'));
-		//The choice field must have 2 options
-		$this->assertCount(2, $formNode->filterXPath('//select[@name="language"]')->children());
-		//The form must have one hidden field named url
-		$this->assertCount(1, $formNode->filterXPath('//input[@name="url"]')->filterXPath('//input[@type="hidden"]'));
-		//The form must have one field for submition
-		$this->assertCount(1, $formNode->filterXPath('//input[@type="submit"]'));
+		$languageNode = $headerNode->filterXPath('//div[@id="language_selector"]');
+		$this->assertNotEmpty($languageNode);
+		//The language selector must have one image
+		$this->assertCount(1, $languageNode->filter('img'));
+		//And one unordered list
+		$languageListNode = $languageNode->filter('ul');
+		$this->assertNotEmpty($languageListNode);
+		//The unordered list must contain 2 links
+		$this->assertCount(2, $languageListNode->filter('a'));
 	}
 
 	/**

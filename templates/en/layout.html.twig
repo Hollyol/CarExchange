@@ -31,25 +31,24 @@
 				{% block links %}{% endblock %}
 			</nav>
 
-			<form action = '{{ path('app_language') }}' method = 'post' id='language_form'>
-				<select	name='language'>
-					<option value = 'en'>English</option>
-					<option value = 'fr'>Français</option>
-				</select>
-
-				<input name = 'url' type = 'hidden' value = '{{ app.request.uri }}' />
-
-				<input type = 'submit' value = 'Submit' />
-			</form>
-
 			{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 			<aside id = 'user_logged'>
-				<p>Loged as : <strong>
+				<p><strong>
 				<a href='{{ path('app_users.home') }}'>{{ app.user.username }}</a>
 				</strong>
 				<a href='{{ path('app_security.logout') }}'>Sign Out</a></p>
 			</aside>
 			{% endif %}
+
+			<div id='language_selector'>
+				<img src="/images/frenglish_flag.jpg" type="image/jpg" />
+				<ul>
+					<li><a href = '{{ path(app.request.attributes.get('_route'),
+						app.request.attributes.get('_route_params')|merge({'_locale': 'en'})) }}'>English</a></li>
+					<li><a href = '{{ path(app.request.attributes.get('_route'),
+						app.request.attributes.get('_route_params')|merge({'_locale': 'fr'})) }}'>Français</a></li>
+				</ul>
+			</div>
 		</header>
 
 		<div class='content'>

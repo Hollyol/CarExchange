@@ -46,6 +46,7 @@ class Rental
      * @var \DateTime
      *
      * @ORM\Column(name="beginDate", type="datetime")
+	 *
 	 * @Assert\NotBlank()
      */
     private $beginDate;
@@ -54,7 +55,8 @@ class Rental
      * @var \DateTime
      *
      * @ORM\Column(name="endDate", type="datetime")
-	 * @Assert\NotBlank();
+	 *
+	 * @Assert\NotBlank()
      */
     private $endDate;
 

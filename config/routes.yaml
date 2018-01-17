@@ -3,12 +3,6 @@ app_core.home:
     defaults:
         _controller: 'App\Controller\CoreController::index'
 
-app_language:
-    path: /{_locale}/lang
-    methods: post
-    defaults:
-        _controller: 'App\Controller\LanguageController::change'
-
 app_security.login:
     path: /{_locale}/login
     defaults:

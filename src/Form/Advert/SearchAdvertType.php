@@ -48,7 +48,7 @@ class SearchAdvertType extends AbstractAdvertType
      */
     public function getBlockPrefix()
     {
-        return 'xp_carbundle_searchAdvert';
+        return 'app_searchAdvert';
     }
 
 	/**

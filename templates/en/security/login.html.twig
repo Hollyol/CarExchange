@@ -16,18 +16,21 @@
 	<p>{{ error.messageKey|trans(error.messageData, 'security') }}</p>
 {% endif %}
 
-<form action='{{ path('app_security.login') }}' method='post'>
-	<label for='username'>Pseudo :</label>
-	<input type='text' id='username' name='_username' value='{{ last_username }}' />
-	<br />
-	<label for='password'>Password :</label>
-	<input type='password' id='password' name='_password' />
+<fieldset>
+	<legend><h2>Sign In :</h2></legend>
+	<form action='{{ path('app_security.login') }}' method='post'>
+		<label for='username'>Pseudo :</label>
+		<input type='text' id='username' name='_username' value='{{ last_username }}' />
+		<br />
+		<label for='password'>Password :</label>
+		<input type='password' id='password' name='_password' />
 
-	{# csrf protection #}
-	<input type='hidden' name='_csrf_token' value = '{{ csrf_token('authenticate') }}' />
-	<br />
-	<button type='submit'>Sign In</button>
-</form>
+		{# csrf protection #}
+		<input type='hidden' name='_csrf_token' value = '{{ csrf_token('authenticate') }}' />
+		<br />
+		<button type='submit'>Sign In</button>
+	</form>
+</fieldset>
 
 <p>Don't have an account yet ? <a href='{{ path('app_users.signup') }}'>Sign Up</a> !</p>
 
