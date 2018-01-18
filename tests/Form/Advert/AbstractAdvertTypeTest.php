@@ -10,48 +10,72 @@ use App\Entity\Location;
 use App\Entity\Billing;
 use App\Entity\Member;
 
-use Symfony\Component\Form\Extension\Validator\ValidatorExtension;
-use Symfony\Component\Form\Form;
-use Symfony\Component\Form\Test\TypeTestCase;
-use Symfony\Component\Validator\ConstraintViolationList;
-use Symfony\Component\Validator\Mapping\ClassMetadata;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-class AbstractAdvertTypeTest extends TypeTestCase
+class AbstractAdvertTypeTest extends KernelTestCase
 {
-	private $validator;
+	use \App\Tests\Form\Advert\AdvertComponentCreationTrait;
 
-	protected function getExtensions()
+	protected static $validator;
+	protected static $formFactory;
+
+	public static function setUpBeforeClass()
 	{
-		$this->validator = $this->createMock(ValidatorInterface::class);
-		$this->validator
-			->method('validate')
-			->will($this->returnValue(new ConstraintViolationList()));
-		$this->validator
-			->method('getMetadataFor')
-			->will($this->returnValue(new ClassMetadata(Form::class)));
+		$container = self::bootKernel()
+			->getContainer();
 
-		return array(
-			new ValidatorExtension($this->validator),
-		);
+		self::$validator = $container
+			->get('validator');
+
+		self::$formFactory = $container
+			->get('form.factory');
 	}
 
 	//The form must be submitted correctly, map the values
 	//and create relevant view
-	/**
-	 * @dataProvider provider
-	 */
-	public function testSubmitValidData(array $formData, Advert $defaultAdvert)
+	public function testSubmitValidData()
 	{
+		$advert = new Advert();
+		$advert->setOwner($this->createValidOwner());
+
+		$advertForm = clone $advert;
+
+		$advert->setTitle('A Great Title');
+		$advert->setBeginDate(new \Datetime('2020-01-01'));
+		$advert->setEndDate(new \Datetime('2020-01-29'));
+		$advert->setBilling($this->createValidBilling());
+		$advert->setLocation($this->createValidLocation());
+		$advert->setCar($this->createValidCar());
+
+		$formData = array(
+			'title' => 'A Great Title',
+			'beginDate' => [
+				'day' => 01,
+				'month' => 01,
+				'year' => 2020,
+			],
+			'endDate' => [
+				'day' => 29,
+				'month' => 01,
+				'year' => 2020,
+			],
+			'location' => $this->createValidLocationArray(),
+			'car' => $this->createValidCarArray(),
+			'billing' => $this->createValidBillingArray(),
+		);
+
 		//test if the form compiles
-		$form = $this->factory->create(AbstractAdvertType::class);
+		$form = self::$formFactory->create(AbstractAdvertType::class, $advertForm);
 
 		$form->submit($formData);
 
 		//test data transformers exceptions
 		$this->assertTrue($form->isSynchronized());
 		//test if the data is correctly setted
-		$this->assertEquals($defaultAdvert, $form->getData());
+		$this->assertEquals($advert, $advertForm);
+
+		$errors = self::$validator->validate($form);
+		$this->assertEmpty($errors);
 
 
 		$view = $form->createView();
@@ -60,73 +84,53 @@ class AbstractAdvertTypeTest extends TypeTestCase
 		foreach(array_keys($formData) as $key){
 			$this->assertArrayHasKey($key, $children);
 		}
-
-		$this->assertEmpty($form->getData()->getRentals());
 	}
 
-	public function provider()
+	/**
+	 * @dataProvider yearProvider
+	 */
+	public function testWrongDates(int $begYear, int $endYear, int $expected)
 	{
-		$car = new Car();
-		$car->setBrand('Peugeot');
-		$car->setModel('307');
-		$car->setSits(5);
-		$car->setFuel('diesel');
-		$car->setDescription('Nice Car.');
-
-		$location = new Location();
-		$location->setCountry('FR');
-		$location->setState('Alsace');
-		$location->setTown('Strasbourg');
-
-		$billing = new Billing();
-		$billing->setPrice(10);
-		$billing->setCurrency('Euro');
-		$billing->setTimeBase('day');
-
 		$advert = new Advert();
-		$advert->setCar($car);
-		$advert->setLocation($location);
-		$advert->setBilling($billing);
-		$advert->setBeginDate(new \Datetime('2018-01-01'));
-		$advert->setEndDate(new \Datetime('2018-03-01'));
-		$advert->setTitle('A Great Title');
+		$advert->setOwner($this->createValidOwner());
 
-		$tomorrow = time("tomorrow");
+		$formData = array(
+			'title' => 'A Great Title',
+			'beginDate' => [
+				'day' => 01,
+				'month' => 01,
+				'year' => $begYear,
+			],
+			'endDate' => [
+				'day' => 29,
+				'month' => 01,
+				'year' => $endYear,
+			],
+			'location' => $this->createValidLocationArray(),
+			'car' => $this->createValidCarArray(),
+			'billing' => $this->createValidBillingArray(),
+		);
 
+		$form = self::$formFactory->create(AbstractAdvertType::class, $advert);
+		$form->submit($formData);
+
+		$errors = self::$validator->validate($form);
+		$this->assertCount($expected, $errors);
+	}
+
+	public function yearProvider()
+	{
 		return array(
-			'everything provided' => array(
-				[
-					'car' => [
-						'brand' => 'Peugeot',
-						'model' => '307',
-						'sits' => 5,
-						'fuel' => 'diesel',
-						'description' => 'Nice Car.',
-					],
-					'location' => [
-						'country' => 'FR',
-						'state' => 'Alsace',
-						'town' => 'Strasbourg',
-					],
-					'billing' => [
-						'price' => 10,
-						'currency' => 'Euro',
-						'timeBase' => 'day',
-					],
-					'beginDate' => [
-						'year' => 2018,
-						'month' => 01,
-						'day' => 01,
-					],
-					'endDate' => [
-						'year' => 2018,
-						'month' => 03,
-						'day' => 01,
-					],
-					'title' => 'A Great Title',
-				],
-			$advert,
-			),
+			'beginDate in the past' => [
+				2016,
+				2020,
+				1,
+			],
+			'endDate in the past' => [
+				2020,
+				2016,
+				2,
+			],
 		);
 	}
 }

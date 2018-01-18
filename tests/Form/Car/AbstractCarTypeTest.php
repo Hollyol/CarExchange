@@ -15,23 +15,19 @@ use Symfony\Component\Validator\Validation;
 
 class AbstractCarTypeTest extends TypeTestCase
 {
-	private $validator;
+	protected static $validator;
+
+	public static function setUpBeforeClass()
+	{
+		self::$validator = Validation::createValidatorBuilder()
+			->getValidator();
+	}
 
 	//If some validation is needed in the form
 	protected function getExtensions()
 	{
-		$this->validator = $this->createMock(ValidatorInterface::class);
-
-		$this->validator
-			->method('validate')
-			->will($this->returnValue(new ConstraintViolationList()));
-
-		$this->validator
-			->method('getMetaDataFor')
-			->will($this->returnValue(new ClassMetadata(Form::class)));
-
 		return array(
-			new ValidatorExtension($this->validator)
+			new ValidatorExtension(self::$validator)
 		);
 	}
 
@@ -61,6 +57,9 @@ class AbstractCarTypeTest extends TypeTestCase
 		foreach(array_keys($formData) as $key){
 			$this->assertArrayHasKey($key, $children);
 		}
+
+		$errors = self::$validator->validate($form);
+		$this->assertEmpty($errors);
 	}
 
 	//PROVIDERS

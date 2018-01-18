@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Integration;
+namespace App\Tests\Navigation;
 
 use App\Entity\Member;
 use App\Tests\AuthorizationTestCase;

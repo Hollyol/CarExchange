@@ -47,6 +47,9 @@ class SearchCarTypeTest extends AbstractCarTypeTest
 		foreach(array_keys($formData) as $key){
 			$this->assertArrayHasKey($key, $children);
 		}
+
+		$errors = static::$validator->validate($form);
+		$this->assertEmpty($errors);
 	}
 
 	public function provider()

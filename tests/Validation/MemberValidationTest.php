@@ -85,7 +85,7 @@ class MemberValidationTest extends KernelTestCase
 		$this->assertEquals($expectedOrigin, $errors[0]->getPropertyPath());
 	}
 
-	public function testLocationConstraints()
+	public function testLocationConstraint()
 	{
 		$location = new Location();
 
