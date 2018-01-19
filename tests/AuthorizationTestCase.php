@@ -16,10 +16,12 @@ abstract class AuthorizationTestCase extends WebTestCase
 
 	public static function setUpBeforeClass()
 	{
-		self::$session = static::$kernel->getContainer()
+		$container = static::bootKernel()->getContainer();
+
+		self::$session = $container
 			->get('session');
 
-		self::$em = static::$kernel->getContainer()
+		self::$em = $container
 			->get('doctrine')
 			->getManager();
 
@@ -57,7 +59,7 @@ abstract class AuthorizationTestCase extends WebTestCase
 		return $client;
 	}
 
-	public static function createUser()
+	protected static function createUser()
 	{
 		$location = new Location();
 		$location->setCountry('FR');

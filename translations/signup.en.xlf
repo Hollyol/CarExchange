@@ -9,7 +9,7 @@
 
 			<trans-unit id = "2">
 				<source>Password</source>
-				<target>password :</target>
+				<target>Password :</target>
 			</trans-unit>
 
 			<trans-unit id = "3">
