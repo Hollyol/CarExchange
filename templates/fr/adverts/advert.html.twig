@@ -3,7 +3,7 @@
 	<p>
 	Valide du : {{ advert.beginDate|date('d-m-Y') }}, jusqu'au {{ advert.endDate|date('d-m-Y') }}
 	<br />
-	A {{ advert.location.town }}, {{ advert.location.state }}, en {{ advert.location.country }}
+	A <span class = 'address'>{{ advert.location.town }}, {{ advert.location.state }} ({{ advert.location.country }})</span>
 	<br />
 	Au prix de {{ advert.billing.price }} {{ advert.billing.currency }}/{{ advert.billing.timeBase }}
 	</p>
