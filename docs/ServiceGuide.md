@@ -62,7 +62,7 @@ This method is called by a form subscriber on SUBMIT event
 ##### Description :
 
 This method replace the title of the provided *advert* with a formated version
-(see [formatTitle](./#formatTitle) for more details.
+(see [formatTitle](ServiceGuide.md#formatTitle) for more details.
 
 ### LocationFormater
 
@@ -91,7 +91,7 @@ This method is called by *LocationFormater::formatLocation()*
 
 ##### Description :
 
-This method works exactly as [formatTown](./#formatTown)
+This method works exactly as [formatTown](ServiceGuide.md#formatTown)
 
 #### formatLocation
 
@@ -104,7 +104,7 @@ This method is called by a from subscriber on SUBMIT event
 ##### Description :
 
 This method replaces the *town* and *state* of the provided *location* with
-the formated versions. See [formatTown](./#formatTown) and [formatState](./#formatState)
+the formated versions. See [formatTown](ServiceGuide.md#formatTown) and [formatState](ServiceGuide.md#formatState)
 for more informations.
 
 ### MemberFormater
@@ -147,4 +147,4 @@ This method is called by a subscriber on SUBMIT event.
 #### Description :
 
 This method formats the phone number and mail address of the provided member,
-see [formatPhone](./#formatPhone) and [formatMail](./#formatMail) for more details.
+see [formatPhone](ServiceGuide.md#formatPhone) and [formatMail](ServiceGuide.md#formatMail) for more details.
