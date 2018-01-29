@@ -19,19 +19,19 @@ listed bellow, to see those, go to the Entities section of **this** file.
 **beginDate** (*Datetime*) :
 The date when the advert is valid. It can be rented from that date + 1 day.
 *Constraints* :
-	-NotBlank
+-NotBlank
 
 **endDate** (*Datetime*) :
 The date when the advert is not available any more. It can be rented until that
 date - 1 day.
 *Constraints* :
-	-NotBlank
-	-GreaterThanBeginDate (Callback)
+-NotBlank
+-GreaterThanBeginDate (Callback)
 
 **title** (*string*) :
 The title of the advert. If not provided by user, it will be auto-generated.
 *Contraints* :
-	- Max Length: 100
+- Max Length: 100
 
 ### Entities
 
@@ -51,8 +51,8 @@ It **may** be persited at the creation of the advert, but will never be
 removed at the deletion.
 *Relationship* : Unidirectionnal many to one.
 *Constraints* :
-	- Valid
-	- NotBlank
+- Valid
+- NotBlank
 
 **billing** (*Billing*) :
 The way the owner of the advert wants to get payed. The billing is *totaly
@@ -61,7 +61,7 @@ advert *can not exist* without a billing.It is persisted and removed in the
 same time as the advert.
 *Relationship* : Uniderectional one to one.
 *Constraints* :
-	- Valid
+- Valid
 
 **owner** (*Member*) :
 The member owning the advert. The owner is *totaly independant* on the advert.
@@ -70,7 +70,7 @@ persisted before the advert is created (a non logged user can't create an
 advert anyway), and will not be removed at the deletion of the advert.
 *Relationship* : Bidirectional Many to one, Owner.
 *Constraints* :
-	- Valid
+- Valid
 
 **rentals** (*Collection* of *Rental*) :
 The rentals linked to the advert. A rental is *totaly dependant* on the
@@ -139,11 +139,11 @@ provided as argument. If no country is provided, an exception is thrown.
 
 **fetchSearchResults** (args: *Advert*; return *Collection* of *Advert*)
 Fetch all adverts that match the one provided as argument. It uses :
-	- *hasValidPeriod*
-	- *whereCarLike*
-	- *whereTownIs*
-	- *whereStateIs*
-	- *whereCountryIs*
+- *hasValidPeriod*
+- *whereCarLike*
+- *whereTownIs*
+- *whereStateIs*
+- *whereCountryIs*
 
 ## Billing
 
@@ -154,23 +154,23 @@ The billing describes the way an owner would like to get payed.
 **currency** (*string*)
 The currency used for the transaction.
 *Constraints* :
-	- NotBlank
-	- Currency
+- NotBlank
+- Currency
 
 **timeBase** (*string*)
 The timeBase of a transaction. Typicaly, this should be one of the following:
-	- hour
-	- day
-	- mounth
-	- year
+- hour
+- day
+- mounth
+- year
 *Constraints* :
-	-NotBlank
-	-Max Length: 15
+- NotBlank
+- Max Length: 15
 
 **price** (*integer*)
 The price the renter has to pay in "currency" for one unit of "timeBase".
 *Constraints* :
-	-NotBlank
+- NotBlank
 
 ### Entities
 
@@ -193,28 +193,28 @@ The car describes the car you want to rent or get rented.
 **brand** (*string*)
 The brand of the car.
 *Constraints* :
-	- Max Length: 100
+- Max Length: 100
 
 **model** (*string*)
 The model of the car.
 *Constraints* :
-	- Max Length: 50
+- Max Length: 50
 
 **description** (*string*)
 A short description of the car. Its owner may add commentaries about it
 here.
 *Constraints* :
-	- Max Length: 500
+- Max Length: 500
 
 **sits** (*integer*)
 The number of sits the car has
 *Constraints* :
-	- GreaterThan: 0
+- GreaterThan: 0
 
 **fuel** (*string*)
 The fuel used by the car
 *Constraints* :
-	- Max Length: 50
+- Max Length: 50
 
 ### Entities
 
@@ -246,18 +246,18 @@ but may be persited in the same time.
 **country** (*string*)
 Represents the country (ISO 3166 alpha-2 code).
 *Constraints* :
-	- Country
-	- NotBlank
+- Country
+- NotBlank
 
 **state** (*string*)
 Represents the state.
 *Constraints* :
-	- Max Length: 50
+- Max Length: 50
 
 **town** (*string*)
 Represents the town.
 *Constraints* :
-	- Max Length: 100
+- Max Length: 100
 
 ### Methods
 
@@ -274,32 +274,32 @@ UserInterface and Serializable.
 **language** (*string*)
 The language used by user (one of the supported languages).
 *Constraints* :
-	- Language
-	- NotBlank
+- Language
+- NotBlank
 
 **username** (*string*)
 The pseudo user by the member
 *Constraints* :
-	- Max Length: 50
-	- NotBlank
+- Max Length: 50
+- NotBlank
 
 **password** (*string*)
 The password of the user. This password is encoded at the creation of the
 member (see the [Form Guide](docs/FormGuide.md) for details).
 *Constraints* :
-	- NotBlank
+- NotBlank
 
 **phone** (*string*)
 The phone number of the user.
 *Constraints* :
-	- Max Length: 50
+- Max Length: 50
 
 **mail** (*string*)
 The e-mail address of the user.
 *Constraints* :
-	- Max Langth: 100
-	- NotBlank
-	- Email
+- Max Langth: 100
+- NotBlank
+- Email
 
 **roles** (*array*)
 The roles the user has (equivalent to permissions)
@@ -368,20 +368,20 @@ The rental entity represents a rental.
 **beginDate** (*Datetime*)
 The date when the rental begins
 *Constraints* :
-	- NotBlank
-	- AdvertIsAvailable (CallBack), checks that the Advert is not rented
-	and is valid between the *beginDate* and *endDate*.
+- NotBlank
+- AdvertIsAvailable (CallBack), checks that the Advert is not rented
+and is valid between the *beginDate* and *endDate*.
 
 **endDate** (*Datetime*)
 The date when the rental ends
 *Constraints* :
-	- NotBlank
-	- GreaterThanBeginDate (Callback)
+- NotBlank
+- GreaterThanBeginDate (Callback)
 
 **status** (*string*)
 The status of the rental.
 *Constraints* :
-	- Max Length: 25
+- Max Length: 25
 
 ### Entities
 

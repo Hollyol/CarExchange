@@ -26,17 +26,17 @@ This form is meant to describe a global behaviour and should not be used
 directly in the app.
 
 #### Fields :
-	- title, TextType
-	- beginDate, DateType
-	- endDate, DateType
-	- car, AbstractCarType
-	- location, AbstractLocationType
-	- billing, BillingType
+- title, TextType
+- beginDate, DateType
+- endDate, DateType
+- car, AbstractCarType
+- location, AbstractLocationType
+- billing, BillingType
 
 #### Constraints :
-	-futureDate (Callback), applies to :
-		- beginDate
-		- endDate
+-futureDate (Callback), applies to :
+	- beginDate
+	- endDate
 
 #### Subscribers
 
@@ -44,7 +44,7 @@ This form has subscribers, they may call some services. See the [Service Guide](
 for more informations.
 
 This form calls
-	- AdvertFormatingService on SUBMIT.
+- AdvertFormatingService on SUBMIT.
 
 ### AddAdvertType
 
@@ -53,8 +53,8 @@ only the ones that changes from the parent. Refer to the AbstractAdvertType
 specifications above for the remaining infos.
 
 #### Fields :
-	- location, AddLocationType
-	- car, AddCarType
+- location, AddLocationType
+- car, AddCarType
 
 #### Translation Domains
 
@@ -69,10 +69,10 @@ only the ones that changes from the parent. Refer to the AbstractAdvertType
 specifications above for the remaining infos.
 
 #### Fields :
-	- title, **removed**
-	- billing, **removed**
-	- car, SearchCarType
-	- location, SearchLocationType
+- title, **removed**
+- billing, **removed**
+- car, SearchCarType
+- location, SearchLocationType
 
 #### Translation Domains
 
@@ -88,13 +88,13 @@ searcing an advert.
 ### BillingType
 
 #### Fields :
-	- currency, CurrencyType
-	- price, IntegerType
-	- timeBase, ChoiceType :
-		- hour
-		- day
-		- month
-		- year
+- currency, CurrencyType
+- price, IntegerType
+- timeBase, ChoiceType :
+	- hour
+	- day
+	- month
+	- year
 
 #### Translation Domain
 
@@ -110,16 +110,16 @@ This form is meant to describe a global behaviour and should not be used
 directly in the app.
 
 #### Fields :
-	- brand, TextType
-	- model, TextType
-	- sits, IntegerType, data = 5
-	- fuel, Choicetype :
-		- diesel
-		- SP-98
-		- SP-95
-		- electric
-		- hybrid
-	- description, TextareaType
+- brand, TextType
+- model, TextType
+- sits, IntegerType, data = 5
+- fuel, Choicetype :
+	- diesel
+	- SP-98
+	- SP-95
+	- electric
+	- hybrid
+- description, TextareaType
 
 ### AddCarType
 
@@ -138,9 +138,9 @@ only the ones that changes from the parent. Refer to the AbstractCarType
 specifications above for the remaining infos.
 
 #### Fields :
-	- brand, **removed**
-	- model, **removed**
-	- description, **removed**
+- brand, **removed**
+- model, **removed**
+- description, **removed**
 
 #### Translation Domain
 
@@ -156,25 +156,23 @@ This form is meant to describe a global behaviour and should not be used
 directly in the app.
 
 #### Fields :
-	- country, CountryType, default : FR
-	- state, TextType
-	- town, TextType
+- country, CountryType, default : FR
+- state, TextType
+- town, TextType
 
 #### Subscribers
 
 This form has subscribers, they may call some services. See the [Service Guide](docs/ServiceGuide.md)
 for more informations.
 
-
 This form calls :
-	- LocationFormatingService on SUBMIT
+- LocationFormatingService on SUBMIT
 
 ### AddLocationType
 
 This form extends the AbstractLocationType. The inforations provided here are
 only the ones that changes from the parent. Refer to the AbstractLocationType
 specifications above for the remaining infos.
-
 
 #### Subscribers
 
@@ -192,8 +190,8 @@ only the ones that changes from the parent. Refer to the AbstractLocationType
 specifications above for the remaining infos.
 
 #### Fields :
-	- state, **not required**
-	- town, **not required**
+- state, **not required**
+- town, **not required**
 
 #### Translation Domain
 
@@ -209,12 +207,12 @@ This form is meant to describe a global behaviour and should not be used
 directly in the app.
 
 #### Fields :
-	- username, TextType
-	- password, PasswordType
-	- mail, EmailType
-	- phone, TextType, **not required**
-	- location, AbstractLocationType
-	- language, ChoiceType (supported languages)
+- username, TextType
+- password, PasswordType
+- mail, EmailType
+- phone, TextType, **not required**
+- location, AbstractLocationType
+- language, ChoiceType (supported languages)
 
 ### MemberSignUpType
 
@@ -223,8 +221,8 @@ only the ones that changes from the parent. Refer to the AbstractMemberType
 specifications above for the remaining infos.
 
 #### Fields :
-	- password, RepeatedType
-	- mail, RepeatedType
+- password, RepeatedType
+- mail, RepeatedType
 
 #### Subscribers
 
@@ -232,8 +230,8 @@ This form has subscribers, they may call some services. See the [Service Guide](
 for more informations.
 
 This form calls :
-	- MemberFormatingService on SUBMIT
-	- PasswordEncoder on POST\_SUBIT (from the security component)
+- MemberFormatingService on SUBMIT
+- PasswordEncoder on POST\_SUBIT (from the security component)
 
 ## Rental
 
@@ -245,13 +243,13 @@ This form is meant to describe a global behaviour, and should not be used
 directly in the app.
 
 #### Fields :
-	- beginDate, DateType
-	- endDate, DateType
+- beginDate, DateType
+- endDate, DateType
 
 #### Constraints :
-	- futureDate, checks that a date is in the future. Applies on :
-		- beginDate
-		- endDate
+- futureDate, checks that a date is in the future. Applies on :
+	- beginDate
+	- endDate
 
 ### AddRentalType
 

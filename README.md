@@ -11,8 +11,8 @@ or check the source (src/Entity).
 ## Forms
 Forms are really important in any project. In this project, there are two
 *main* categories of forms:
-	- Those used to search entities
-	- Those used to add entities
+- Those used to search entities
+- Those used to add entities
 
 All of these forms extends from an "abstract" form (it is not actualy abstract
 the way object oriented programation suggests it. But those forms aren't meant
@@ -33,8 +33,8 @@ or in the source directly (src/Repository).
 
 ## Translation
 This app support two languages :
-	-French
-	-English
+-French
+-English
 
 The essential of translation is done directly in templates. All URIs contains a
 *locale* parameter. It is used to tell the controllers what template should be
