@@ -1,4 +1,4 @@
-#Forms
+# Forms
 
 This app uses many form. This file shows them and tell how they work.
 each form is tied to an entity, but each entity doesn't have one only form.
@@ -16,16 +16,16 @@ more details.
 performed thanks to the OptionsSetter. See the [Service Guide](docs/ServiceGuide.md)
 for mor informations.
 
-##Advert Forms
+## Advert Forms
 
 This section is about forms tied to the entity *Advert*.
 
-###AbstractAdvertType
+### AbstractAdvertType
 
 This form is meant to describe a global behaviour and should not be used
 directly in the app.
 
-####Fields :
+#### Fields :
 	- title, TextType
 	- beginDate, DateType
 	- endDate, DateType
@@ -33,12 +33,12 @@ directly in the app.
 	- location, AbstractLocationType
 	- billing, BillingType
 
-####Constraints :
+#### Constraints :
 	-futureDate (Callback), applies to :
 		- beginDate
 		- endDate
 
-####Subscribers
+#### Subscribers
 
 This form has subscribers, they may call some services. See the [Service Guide](docs/ServiceGuide.md)
 for more informations.
@@ -46,48 +46,48 @@ for more informations.
 This form calls
 	- AdvertFormatingService on SUBMIT.
 
-###AddAdvertType
+### AddAdvertType
 
 This form extends the AbstractAdvertType. The inforations provided here are
 only the ones that changes from the parent. Refer to the AbstractAdvertType
 specifications above for the remaining infos.
 
-####Fields :
+#### Fields :
 	- location, AddLocationType
 	- car, AddCarType
 
-####Translation Domains
+#### Translation Domains
 
 This form is translated using the "addAdvert" domain. The fields
 "location" and "car" are translated using "addLocation" and "addCar",
 respectively.
 
-###SearchAdvertType
+### SearchAdvertType
 
 This form extends the AbstractAdvertType. The inforations provided here are
 only the ones that changes from the parent. Refer to the AbstractAdvertType
 specifications above for the remaining infos.
 
-####Fields :
+#### Fields :
 	- title, **removed**
 	- billing, **removed**
 	- car, SearchCarType
 	- location, SearchLocationType
 
-####Translation Domains
+#### Translation Domains
 
 This form is translated using the "searchAdvert" domain. The fields
 "location" and "car" are translated using "searchLocation" and "searchCar",
 respectively.
 
-##Billing
+## Billing
 
 This section contains one only form, since the billing is not used while
 searcing an advert.
 
-###BillingType
+### BillingType
 
-####Fields :
+#### Fields :
 	- currency, CurrencyType
 	- price, IntegerType
 	- timeBase, ChoiceType :
@@ -96,20 +96,20 @@ searcing an advert.
 		- month
 		- year
 
-####Translation Domain
+#### Translation Domain
 
 This form is translated using the "addBilling" domain.
 
-##Car
+## Car
 
 This section contains all forms tied to the entity *Car*.
 
-###AbstractCarType
+### AbstractCarType
 
 This form is meant to describe a global behaviour and should not be used
 directly in the app.
 
-####Fields :
+#### Fields :
 	- brand, TextType
 	- model, TextType
 	- sits, IntegerType, data = 5
@@ -121,46 +121,46 @@ directly in the app.
 		- hybrid
 	- description, TextareaType
 
-###AddCarType
+### AddCarType
 
 This form extends the AbstractCarType. The inforations provided here are
 only the ones that changes from the parent. Refer to the AbstractCarType
 specifications above for the remaining infos.
 
-####Translation Domain
+#### Translation Domain
 
 This form is translated using the "addCar" domain.
 
-###SearchCarType
+### SearchCarType
 
 This form extends the AbstractCarType. The inforations provided here are
 only the ones that changes from the parent. Refer to the AbstractCarType
 specifications above for the remaining infos.
 
-####Fields :
+#### Fields :
 	- brand, **removed**
 	- model, **removed**
 	- description, **removed**
 
-####Translation Domain
+#### Translation Domain
 
 This form is translated using the "searchCar" domain.
 
-##Location
+## Location
 
 This section is about all forms tied to the entity *Location*
 
-###AbstractLocationType
+### AbstractLocationType
 
 This form is meant to describe a global behaviour and should not be used
 directly in the app.
 
-####Fields :
+#### Fields :
 	- country, CountryType, default : FR
 	- state, TextType
 	- town, TextType
 
-####Subscribers
+#### Subscribers
 
 This form has subscribers, they may call some services. See the [Service Guide](docs/ServiceGuide.md)
 for more informations.
@@ -169,46 +169,46 @@ for more informations.
 This form calls :
 	- LocationFormatingService on SUBMIT
 
-###AddLocationType
+### AddLocationType
 
 This form extends the AbstractLocationType. The inforations provided here are
 only the ones that changes from the parent. Refer to the AbstractLocationType
 specifications above for the remaining infos.
 
 
-####Subscribers
+#### Subscribers
 
 This form calls LocationRepository::avoidDuplicate on SUBMIT. See the [Entity
 Guide](docs/EntityGuide.md) for more informations.
 
-####Translation Domain
+#### Translation Domain
 
 This form is translated using the "addLocation" domain.
 
-###SearchLocationType
+### SearchLocationType
 
 This form extends the AbstractLocationType. The inforations provided here are
 only the ones that changes from the parent. Refer to the AbstractLocationType
 specifications above for the remaining infos.
 
-####Fields :
+#### Fields :
 	- state, **not required**
 	- town, **not required**
 
-####Translation Domain
+#### Translation Domain
 
 This form is translated using the "searchAdvert" domain
 
-##Member
+## Member
 
 This section is about all forms tied to the entity *Member*.
 
-###AbstractMemberType
+### AbstractMemberType
 
 This form is meant to describe a global behaviour and should not be used
 directly in the app.
 
-####Fields :
+#### Fields :
 	- username, TextType
 	- password, PasswordType
 	- mail, EmailType
@@ -216,17 +216,17 @@ directly in the app.
 	- location, AbstractLocationType
 	- language, ChoiceType (supported languages)
 
-###MemberSignUpType
+### MemberSignUpType
 
 This form extends the AbstractMemberType. The inforations provided here are
 only the ones that changes from the parent. Refer to the AbstractMemberType
 specifications above for the remaining infos.
 
-####Fields :
+#### Fields :
 	- password, RepeatedType
 	- mail, RepeatedType
 
-####Subscribers
+#### Subscribers
 
 This form has subscribers, they may call some services. See the [Service Guide](docs/ServiceGuide.md)
 for more informations.
@@ -235,30 +235,30 @@ This form calls :
 	- MemberFormatingService on SUBMIT
 	- PasswordEncoder on POST\_SUBIT (from the security component)
 
-##Rental
+## Rental
 
 This section is about forms tied to the entity *Rental*
 
-###AbstractRentalType
+### AbstractRentalType
 
 This form is meant to describe a global behaviour, and should not be used
 directly in the app.
 
-####Fields :
+#### Fields :
 	- beginDate, DateType
 	- endDate, DateType
 
-####Constraints :
+#### Constraints :
 	- futureDate, checks that a date is in the future. Applies on :
 		- beginDate
 		- endDate
 
-###AddRentalType
+### AddRentalType
 
 This form extends the AbstractRentalType. The inforations provided here are
 only the ones that changes from the parent. Refer to the AbstractRentalType
 specifications above for the remaining infos.
 
-####Translation Domain
+#### Translation Domain
 
 This form is translated using the "addRental" domain

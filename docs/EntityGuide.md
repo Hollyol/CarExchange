@@ -1,4 +1,4 @@
-#Entities
+# Entities
 
 This file show details about each entity used in the app.
 Some constraints are provided bellow the corresponding entities. These
@@ -6,12 +6,12 @@ constraints are the ones specified in the src/Entity/"entity" file. **Be
 aware** that some constraints may be specified in some form. See the
 [Form Guide](docs/FormGuide.md) for more details.
 
-##Advert
+## Advert
 
 The advert is the most important entity of the app. It contains all the
 information needed for a exchange.
 
-###Attributes
+### Attributes
 
 A list of attributes. Some attributes may be others entities and are not
 listed bellow, to see those, go to the Entities section of **this** file.
@@ -33,7 +33,7 @@ The title of the advert. If not provided by user, it will be auto-generated.
 *Contraints* :
 	- Max Length: 100
 
-###Entities
+### Entities
 
 A list of all entities engaged in a relationship with **Advert**.
 
@@ -77,7 +77,7 @@ The rentals linked to the advert. A rental is *totaly dependant* on the
 advert. The rentals are persited and removed independantely from the advert.
 *Relationship* : Bidirectional One to many, Inverse.
 
-###Methods
+### Methods
 
 The setters and getters will not be listed here (or anywhere). But any
 attribute as one (exept id because it should be ignored).
@@ -110,7 +110,7 @@ the array provided as argument.
 **addRental** (args: *Rental*; return: *Advert*)
 Add the rental to the collection and set the advert of the rental to *this*.
 
-###Repository Methods
+### Repository Methods
 
 The advert entity has a few custom methods in its repository.
 
@@ -145,11 +145,11 @@ Fetch all adverts that match the one provided as argument. It uses :
 	- *whereStateIs*
 	- *whereCountryIs*
 
-##Billing
+## Billing
 
 The billing describes the way an owner would like to get payed.
 
-###Attributes
+### Attributes
 
 **currency** (*string*)
 The currency used for the transaction.
@@ -172,23 +172,23 @@ The price the renter has to pay in "currency" for one unit of "timeBase".
 *Constraints* :
 	-NotBlank
 
-###Entities
+### Entities
 
 **advert** (*Advert*)
 A billing is tied to an advert. It cannot exist without an advert. The billing
 is persisted and removed in the same time as the advert.
 *Relationship* : Not aware (*Not the owner on unidirectional relationship*)
 
-###Methods
+### Methods
 
 This entity has the usual getters and setters for each attribute, but they
 won't be detailed here (or anywhere).
 
-##Car
+## Car
 
 The car describes the car you want to rent or get rented.
 
-###Attributes
+### Attributes
 
 **brand** (*string*)
 The brand of the car.
@@ -216,14 +216,14 @@ The fuel used by the car
 *Constraints* :
 	- Max Length: 50
 
-###Entities
+### Entities
 
 **advert** (*Advert*)
 A car is tied to an advert. It cannot exist without it. The car is persisted
 and removed in the same time as the advert
 *Relationship* : Not aware (Not the owner of unidirectional relationship)
 
-###Methods
+### Methods
 
 There are the usual getters and setters for each attribute, but they won't be
 detailed here.
@@ -236,12 +236,12 @@ contains a key that is not an attribute, it will be ignored.
 **__construct** (args: *array*; return *null*)
 *hydrate* the car with the array given as argument.
 
-##Location
+## Location
 
 The location represents a place. It is independant on *adverts* or *members*
 but may be persited in the same time.
 
-###Attributes
+### Attributes
 
 **country** (*string*)
 Represents the country (ISO 3166 alpha-2 code).
@@ -259,17 +259,17 @@ Represents the town.
 *Constraints* :
 	- Max Length: 100
 
-###Methods
+### Methods
 
 There are the usual setters and getters, but they will not be detailed here (or
 anywhere).
 
-##Member
+## Member
 
 A member is a user of the app owning an account on it. It implements
 UserInterface and Serializable.
 
-###Attributes
+### Attributes
 
 **language** (*string*)
 The language used by user (one of the supported languages).
@@ -304,7 +304,7 @@ The e-mail address of the user.
 **roles** (*array*)
 The roles the user has (equivalent to permissions)
 
-###Entities
+### Entities
 
 **adverts** (*Collection of Advert*)
 The adverts the member owns. These adverts are removed in the same time as the
@@ -322,7 +322,7 @@ The location *may* be created in the same time as the member, however, it will
 never been removed with him/her.
 *Relationship* : Unidirectional one to one
 
-###Methods
+### Methods
 
 There are the usual getters and setters, but they won't be detailed here (or
 anywhere).
@@ -351,7 +351,7 @@ Remove the advert given as argument from the collection.
 **removeRental** (args: *Rental*; return *null*)
 Remove the rental provided as argumetn from the collection.
 
-###Repository Methods
+### Repository Methods
 
 The member entity has methods in its repository.
 
@@ -359,11 +359,11 @@ The member entity has methods in its repository.
 Search a user in database. Returns the first user that as username **or** mail
 like the first argument. If none is found, return null.
 
-##Rental
+## Rental
 
 The rental entity represents a rental.
 
-###Attributes
+### Attributes
 
 **beginDate** (*Datetime*)
 The date when the rental begins
@@ -383,7 +383,7 @@ The status of the rental.
 *Constraints* :
 	- Max Length: 25
 
-###Entities
+### Entities
 
 **advert** (*Advert*)
 The advert beiing rented.
@@ -395,7 +395,7 @@ The member that initiated the rental.
 *Constraints* :
 	- Valid
 
-###Methods
+### Methods
 
 There are the usual setters and getters for each attribute, but they will not
 be detailed here (or anywhere).

@@ -1,14 +1,14 @@
-#CarExchange
+# CarExchange
 This is a demo project. It aims to show what i can do with the Symfony
 framework.
 
-##Entities
+## Entities
 This project uses a few entities. Each of them are
 managed by the doctrine ORM. These entities are made of several attributes and
 methods. To learn more about these, see the [Entity Guide](docs/EntityGuide.md)
 or check the source (src/Entity).
 
-##Forms
+## Forms
 Forms are really important in any project. In this project, there are two
 *main* categories of forms:
 	- Those used to search entities
@@ -22,16 +22,16 @@ defined.
 If you want to learn more about forms, take a look at the [Form Guide](docs/FormGuide.md)
 or check the source (src/Form)
 
-##Services
+## Services
 A few services are available within the app. Take a look at the [Service Guide](docs/ServiceGuide.md)
 for more informations. You can also see the source (src/Service).
 
-##Repositories
+## Repositories
 There are a few customs fetching functions defined in the repositories of the
 concerned entities. More details are available in the [EntityGuide](docs/EntityGuide.md)
 or in the source directly (src/Repository).
 
-##Translation
+## Translation
 This app support two languages :
 	-French
 	-English
