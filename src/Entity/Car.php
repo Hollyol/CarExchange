@@ -42,6 +42,7 @@ class Car
      * @var string
      *
      * @ORM\Column(name="description", type="text", nullable=true)
+	 * @Assert\Length(max = "500")
      */
     private $description;
 

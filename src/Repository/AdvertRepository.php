@@ -25,7 +25,7 @@ class AdvertRepository extends \Doctrine\ORM\EntityRepository
 		return $qb->getQuery()->getResult();
 	}
 
-	public function hasValidPeriod(QueryBuilder $qb, \Datetime $beginDate, $endDate){
+	public function hasValidPeriod(QueryBuilder $qb, \Datetime $beginDate, \Datetime $endDate){
 		if (!$beginDate OR !$endDate)
 			throw new PreconditionRequiredHttpException('You must provide begin and end dates');
 

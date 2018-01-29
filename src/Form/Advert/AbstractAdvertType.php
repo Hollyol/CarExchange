@@ -39,9 +39,7 @@ class AbstractAdvertType extends AbstractType
 			->add('endDate', DateType::class, array(
 				'constraints' => $futureDate,
 			))
-			->add('car', AbstractCarType::class, array(
-				'translation_domain' => 'addCar'
-			))
+			->add('car', AbstractCarType::class)
 			->add('location', AbstractLocationType::class)
 			->add('billing', BillingType::class)
 			->add('submit', SubmitType::class)

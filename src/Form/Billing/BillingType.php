@@ -20,7 +20,7 @@ class BillingType extends AbstractType
 			->add('currency', CurrencyType::class,
 				array(
 					'placeholder' => 'Euro',
-					'empty_data' => 'Euro',
+					'empty_data' => 'EUR',
 					'required' => false,
 				)
 			)
