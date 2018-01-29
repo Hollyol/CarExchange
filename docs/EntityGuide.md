@@ -4,7 +4,7 @@ This file show details about each entity used in the app.
 Some constraints are provided bellow the corresponding entities. These
 constraints are the ones specified in the src/Entity/"entity" file. **Be
 aware** that some constraints may be specified in some form. See the
-[Form Guide](docs/FormGuide.md) for more details.
+[Form Guide](FormGuide.md) for more details.
 
 ## Advert
 
@@ -285,7 +285,7 @@ The pseudo user by the member
 
 **password** (*string*)
 The password of the user. This password is encoded at the creation of the
-member (see the [Form Guide](docs/FormGuide.md) for details).
+member (see the [Form Guide](FormGuide.md) for details).
 *Constraints* :
 - NotBlank
 

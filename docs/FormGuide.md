@@ -9,11 +9,11 @@ behaviour and **must not** be used in the application).
 
 **Be aware** : Some forms have constraints. Those constraints are specific to
 the form, and are used in **addition** to the constraints described in the
-entity file (src/Entity/...). See the [Entity Guide](docs/EntityGuide.md) for
+entity file (src/Entity/...). See the [Entity Guide](EntityGuide.md) for
 more details.
 
 **Additional note** : When fields or types are changed, the modifications are
-performed thanks to the OptionsSetter. See the [Service Guide](docs/ServiceGuide.md)
+performed thanks to the OptionsSetter. See the [Service Guide](ServiceGuide.md/#OptionsSetter)
 for mor informations.
 
 ## Advert Forms
@@ -40,7 +40,7 @@ directly in the app.
 
 #### Subscribers
 
-This form has subscribers, they may call some services. See the [Service Guide](docs/ServiceGuide.md)
+This form has subscribers, they may call some services. See the [Service Guide](ServiceGuide.md)
 for more informations.
 
 This form calls
@@ -162,7 +162,7 @@ directly in the app.
 
 #### Subscribers
 
-This form has subscribers, they may call some services. See the [Service Guide](docs/ServiceGuide.md)
+This form has subscribers, they may call some services. See the [Service Guide](ServiceGuide.md)
 for more informations.
 
 This form calls :
@@ -177,7 +177,7 @@ specifications above for the remaining infos.
 #### Subscribers
 
 This form calls LocationRepository::avoidDuplicate on SUBMIT. See the [Entity
-Guide](docs/EntityGuide.md) for more informations.
+Guide](EntityGuide.md) for more informations.
 
 #### Translation Domain
 
@@ -226,7 +226,7 @@ specifications above for the remaining infos.
 
 #### Subscribers
 
-This form has subscribers, they may call some services. See the [Service Guide](docs/ServiceGuide.md)
+This form has subscribers, they may call some services. See the [Service Guide](ServiceGuide.md)
 for more informations.
 
 This form calls :
