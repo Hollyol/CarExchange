@@ -1,0 +1,15 @@
+.signup_dialogue {
+	display: flex;
+	justify-content: space-around;
+}
+
+.apps_signup {
+	display: flex;
+	flex-flow: column;
+	justify-content: center;
+	padding: 0 50px;
+}
+
+.form_signup {
+	padding: 0 50px;
+}

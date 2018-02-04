@@ -54,6 +54,7 @@ class Car
 	 * 	value = 0,
 	 * 	message = "sits.lesser_than_one",
 	 * )
+	 * @Assert\Type("integer")
      */
     private $sits;
 

@@ -1,0 +1,15 @@
+.login_dialogue {
+	display: flex;
+	justify-content: space-around;
+}
+
+.form_login {
+	padding: 0 50px;
+}
+
+.apps_login {
+	padding: 0 50px;
+	display: flex;
+	flex-flow: column;
+	justify-content: center;
+}

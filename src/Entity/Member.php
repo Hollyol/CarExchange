@@ -71,16 +71,15 @@ class Member implements UserInterface, \Serializable
     /**
      * @var string
      *
-     * @ORM\Column(name="password", type="string", length=64, nullable=false)
+     * @ORM\Column(name="password", type="string", length=64, nullable=true)
 	 *
-	 * @Assert\NotBlank()
      */
     private $password;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="phone", type="string", length=15, unique=true)
+     * @ORM\Column(name="phone", type="string", length=15, unique=true, nullable=true)
 	 *
 	 * @Assert\Length(max=50)
      */

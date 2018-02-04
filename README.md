@@ -41,3 +41,7 @@ The essential of translation is done directly in templates. All URIs contains a
 used.
 
 Forms are also translated thanks to xliff files (located in translations/)
+
+## Tests
+The app is tested (Unit, Functionnal and Integration), see tests/ in the source
+for more information.

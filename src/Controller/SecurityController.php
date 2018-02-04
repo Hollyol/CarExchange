@@ -7,6 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\HttpFoundation\Request;
 
+use Symfony\Component\HttpFoundation\Response;
+
 class SecurityController extends Controller
 {
 	public function login(Request $request, AuthenticationUtils $authUtils)
@@ -18,5 +20,12 @@ class SecurityController extends Controller
 			'last_username' => $lastUsername,
 			'error' => $error,
 		));
+	}
+
+	public function facebookLogin(Request $request)
+	{
+		return new Response('<body><h1>Facebook login</h1>
+			<p>Trying to login as ' . $_POST['name'] . '</p>
+			<a href = \'/fr\'>Home</a></body>');
 	}
 }

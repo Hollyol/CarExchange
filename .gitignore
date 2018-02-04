@@ -1,4 +1,5 @@
 *.swp
+/src/Migrations
 
 ###> symfony/framework-bundle ###
 .env

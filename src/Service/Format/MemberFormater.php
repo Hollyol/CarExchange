@@ -2,13 +2,15 @@
 
 namespace App\Service\Format;
 
-use App\Entity\Member;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class MemberFormater
 {
-	public function formatMember(Member $member)
+	public function formatMember(UserInterface $member)
 	{
-		$member->setPhone($this->formatPhone($member->getPhone()));
+		if ($member->getPhone()) {
+			$member->setPhone($this->formatPhone($member->getPhone()));
+		}
 		$member->setMail($this->formatMail($member->getMail()));
 
 		return $member;

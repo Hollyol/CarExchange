@@ -18,6 +18,7 @@ security:
             security: false
         main:
             anonymous: ~
+            provider: member_db
 
             # activate different ways to authenticate
 
@@ -25,7 +26,6 @@ security:
             # https://symfony.com/doc/current/book/security.html#a-configuring-how-your-users-will-authenticate
 
             form_login:
-                provider: member_db
                 login_path: app_security.login
                 check_path: app_security.login
                 default_target_path: app_users.home
@@ -35,7 +35,11 @@ security:
             logout:
                 path: app_security.logout
                 target: app_core.home
-            # https://symfony.com/doc/current/cookbook/security/form_login_setup.html
+
+            guard:
+                authenticators:
+                    - App\Security\FacebookAuthenticator
+                provider: member_db
 
     access_control:
         - { path: /users/login$, roles: IS_AUTHENTICATES_ANONYMOUSLY }

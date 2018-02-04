@@ -1,0 +1,14 @@
+{% extends "fr/layout.html.twig" %}
+
+{% block title %}
+	{{ parent() }} - New Account
+{% endblock %}
+
+{% block content %}
+<fieldset>
+	<legend><h2>Almost there !</h2></legend>
+	<p>We just need a few more informations...</p>
+
+	{{ form(form) }}
+</fieldset>
+{% endblock %}

@@ -4,6 +4,18 @@
 	{{ parent() }} - Sign Up
 {% endblock %}
 
+{% block stylesheets %}
+	{{ parent() }}
+	<link rel = 'stylesheet' type = 'text/css' href = '/css/signup.css' />
+{% endblock %}
+
+{% block scripts %}
+	<!-- Facebook Javascript SDK + Facebook Module -->
+	<script type = 'text/javascript' src = '/js/initFacebook.js'></script>
+	<script type = 'text/javascript' src = '/js/fb_module/fb_module_core.js'></script>
+	<script type = 'text/javascript' src = '/js/fb_module/fb_module_signup.js'></script>
+{% endblock %}
+
 {% block flashes %}
 	{% for message in app.flashes('signup') %}
 		<p class='flash_message'>{{ message }}</p>
@@ -11,8 +23,15 @@
 {% endblock %}
 
 {% block content %}
+<div class = 'signup_dialogue'>
 	<fieldset>
 		<legend><h2>Sign Up :</h2></legend>
 		{{ form(form) }}
 	</fieldset>
+
+	<fieldset class = 'apps_signup'>
+		<legend><h2>Or :</h2></legend>
+		<button id = 'facebook_signup'>Continue with Facebook</button>
+	</fieldset>
+</div>
 {% endblock %}

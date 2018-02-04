@@ -4,6 +4,18 @@
 	{{ parent() }} - Connexion
 {% endblock %}
 
+{% block stylesheets %}
+	{{ parent() }}
+	<link rel = 'stylesheet' type = 'text/css' href = '/css/login.css' />
+{% endblock %}
+
+{% block scripts %}
+	<!-- Facebook Javascript SDK -->
+	<script src = '/js/initFacebook.js'></script>
+	<script src = '/js/fb_module/fb_module_core.js'></script>
+	<script src = '/js/fb_module/fb_module_login.js'></script>
+{% endblock %}
+
 {% block content %}
 
 {% block flashes %}
@@ -16,22 +28,27 @@
 	<p>{{ error.messageKey|trans(error.messageData, 'security') }}</p>
 {% endif %}
 
-<fieldset>
-	<legend><h2>Se Connecter :</h2></legend>
-	<form action='{{ path('app_security.login') }}' method='post'>
-		<label for='username'>Pseudo ou E-mail :</label>
-		<input type='text' id='username' name='_username' value='{{ last_username }}' />
-		<br />
-		<label for='password'>Mot de passe :</label>
-		<input type='password' id='password' name='_password' />
+<div class = 'login_dialogue'>
+	<fieldset class = form_login>
+		<legend><h2>Se Connecter :</h2></legend>
+		<form action='{{ path('app_security.login') }}' method='post'>
+			<label for='username'>Pseudo ou E-mail :</label>
+			<input type='text' id='username' name='_username' value='{{ last_username }}' />
+			<br />
+			<label for='password'>Mot de passe :</label>
+			<input type='password' id='password' name='_password' />
 
-			{# csrf protection #}
-		<input type='hidden' name='_csrf_token' value = '{{ csrf_token('authenticate') }}' />
-		<br />
-		<button type='submit'>Connexion</button>
-	</form>
-</fieldset>
+				{# csrf protection #}
+			<input type='hidden' name='_csrf_token' value = '{{ csrf_token('authenticate') }}' />
+			<br />
+			<button type='submit'>Connexion</button>
+		</form>
+		<p>Vous n'avez pas encore de compte ? <a href='{{ path('app_users.signup') }}'>Créer un compte</a> !</p>
+	</fieldset>
 
-<p>Vous n'avez pas encore de compte ? <a href='{{ path('app_users.signup') }}'>Créer un compte</a> !</p>
-
+	<fieldset class = 'apps_login'>
+		<legend><h2>Ou alors :</h2></legend>
+		<button id = 'facebook_login'>Se connecter avec Facebook</button>
+	</fieldset>
+</div>
 {% endblock %}

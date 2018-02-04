@@ -4,6 +4,18 @@
 	{{ parent() }} - Nouveau Compte
 {% endblock %}
 
+{% block stylesheets %}
+	{{ parent() }}
+	<link rel = 'stylesheet' type = 'text/css' href = '/css/signup.css' />
+{% endblock %}
+
+{% block scripts %}
+	<!-- Facebook Javascript SDK + Facebook Module -->
+	<script type = 'text/javascript' src = '/js/initFacebook.js'></script>
+	<script type = 'text/javascript' src = '/js/fb_module/fb_module_core.js'></script>
+	<script type = 'text/javascript' src = '/js/fb_module/fb_module_signup.js'></script>
+{% endblock %}
+
 {% block flashes %}
 	{% for message in app.flashes('signup') %}
 		<p class='flash_message'>{{ message }}</p>
@@ -11,8 +23,15 @@
 {% endblock %}
 
 {% block content %}
-	<fieldset>
+<div class = 'signup_dialogue'>
+	<fieldset class = 'form_signup'>
 		<legend><h2>Créer un compte :</h2></legend>
 		{{ form(form) }}
 	</fieldset>
+
+	<fieldset class = 'apps_signup'>
+		<legend><h2>Ou alors :</h2></legend>
+		<button id = 'facebook_signup'>Créer un compte via Facebook</button>
+	</fieldset>
+</div>
 {% endblock %}

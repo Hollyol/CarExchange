@@ -4,9 +4,14 @@ app_core.home:
         _controller: 'App\Controller\CoreController::index'
 
 app_security.login:
-    path: /{_locale}/login
+    path: /{_locale}/login/
     defaults:
         _controller: 'App\Controller\SecurityController::login'
+
+app_security.facebookLogin:
+    path: /{_locale}/facebookLogin/
+    defaults:
+        _controller: 'App\Controller\SecurityController::facebookLogin'
 
 app_security.logout:
     path: /{_locale}/logout
@@ -15,6 +20,11 @@ app_users.signup:
     path: /{_locale}/users/signup/
     defaults:
         _controller: 'App\Controller\UsersController::addMember'
+
+app_users.facebookSignUp:
+    path: /{_locale}/users/facebookSignUp/
+    defaults:
+        _controller: 'App\Controller\UsersController::addFacebookMember'
 
 app_users.home:
     path: /{_locale}/users/

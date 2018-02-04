@@ -37,7 +37,9 @@ a:hover {
 }
 
 .content {
+	display: flex;
 	flex: 1;
+	flex-flow: column;
 }
 
 .flash_message {
