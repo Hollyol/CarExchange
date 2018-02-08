@@ -51,12 +51,10 @@ class UsersController extends Controller
 		$member = new Member();
 
 		if (preg_match('(/users/signup)', $request->headers->get('referer'))) {
-			$member->setUsername($_POST['name']);
-			$member->setMail($_POST['email']);
-			$member->setLanguage(substr($_POST['locale'], 0, 2));
+			$member->setUsername($request->request->get('name'));
+			$member->setMail($request->request->get('email'));
+			$member->setLanguage(substr($request->request->get('locale'), 0, 2));
 		}
-
-		echo($member->getMail());
 
 		$form = $this->createForm(ApiMemberSignUpType::class, $member);
 

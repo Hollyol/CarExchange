@@ -9,7 +9,6 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-use App\Service\Form\OptionsSetter;
 use App\Form\Member\EventListener\MemberFormatingSubscriber;
 use App\Form\Member\EventListener\PasswordEncoderSubscriber;
 

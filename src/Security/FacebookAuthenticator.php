@@ -16,7 +16,7 @@ class FacebookAuthenticator extends AbstractGuardAuthenticator
 {
 	public function supports(Request $request)
 	{
-		return (isset($_POST['authType']) && $_POST['authType'] == 'facebookAuthentication');
+		return ($request->request->get('authType') !== null && $request->request->get('authType') == 'facebookAuthentication');
 	}
 
 	public function getUser($credentials, \Symfony\Component\Security\Core\User\UserProviderInterface $userProvider)
@@ -30,7 +30,7 @@ class FacebookAuthenticator extends AbstractGuardAuthenticator
 
 	public function getCredentials(Request $request)
 	{
-		return $_POST['name'];
+		return $request->request->get('name');
 	}
 
 	public function checkCredentials($credentials, \Symfony\Component\Security\Core\User\UserInterface $user)
@@ -46,7 +46,7 @@ class FacebookAuthenticator extends AbstractGuardAuthenticator
 	public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
 	{
 		$message = array(
-			'message' => 'You are not a registered member(' . $_POST['id'] . ')'
+			'message' => 'You are not a registered member(' . $request->request->get('id') . ')'
 		);
 
 		return new JsonResponse($message, Response::HTTP_FORBIDDEN);

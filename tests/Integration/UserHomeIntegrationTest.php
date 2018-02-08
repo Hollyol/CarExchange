@@ -23,7 +23,8 @@ class UserHomeIntegrationTest extends AuthorizationTestCase
 
 		$this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 		$contentNode = $crawler->filter('div.content');
-		$this->assertCount(2, $contentNode->filter('p'));
+		$this->assertCount(3, $contentNode->filter('p'));
+		$this->assertCount(1, $contentNode->filter('fieldset'));
 	}
 
 	public function localeProvider()

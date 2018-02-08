@@ -25,7 +25,6 @@ class SecurityController extends Controller
 	public function facebookLogin(Request $request)
 	{
 		return new Response('<body><h1>Facebook login</h1>
-			<p>Trying to login as ' . $_POST['name'] . '</p>
 			<a href = \'/fr\'>Home</a></body>');
 	}
 }

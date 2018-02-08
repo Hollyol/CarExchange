@@ -87,7 +87,7 @@ class AdvertValidationTest extends KernelTestCase
 		$advert = new Advert();
 
 		$errors = self::$validator->validate($advert);
-		$this->assertCount(4, $errors);
+		$this->assertCount(2, $errors);
 
 		foreach ($errors as $error) {
 			$origin[] = $error->getPropertyPath();
@@ -95,8 +95,6 @@ class AdvertValidationTest extends KernelTestCase
 
 		$this->assertTrue(in_array('car', $origin));
 		$this->assertTrue(in_array('location', $origin));
-		$this->assertTrue(in_array('owner', $origin));
-		$this->assertTrue(in_array('billing', $origin));
 	}
 
 	public function singleErrorProvider()

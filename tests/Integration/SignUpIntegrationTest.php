@@ -23,8 +23,8 @@ class SignUpIntegrationTest extends WebTestCase
 	{
 		$crawler = self::$client->request('GET', '/' . $locale . '/users/signup/');
 
-		$this->assertCount(1, $crawler->filter('fieldset'));
-		$this->assertCount(1, $crawler->filter('legend'));
+		$this->assertCount(2, $crawler->filter('fieldset'));
+		$this->assertCount(2, $crawler->filter('legend'));
 		$formNode = $crawler->filter('form');
 		$this->assertNotEmpty($formNode);
 		$this->assertCount(9, $formNode->filter('input'));

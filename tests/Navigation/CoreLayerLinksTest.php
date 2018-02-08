@@ -27,7 +27,7 @@ class CoreLayerLinksTest extends WebTestCase
 		$crawler = self::$client->click($link);
 
 		$this->assertEquals(200, self::$client->getResponse()->getStatusCode());
-		$this->assertEquals('http://localhost/fr/login', $crawler->getUri());
+		$this->assertEquals('http://localhost/fr/login/', $crawler->getUri());
 
 		$link = self::$client->request('GET', '/en/')
 			->selectLink('Sign In')
@@ -35,7 +35,7 @@ class CoreLayerLinksTest extends WebTestCase
 		$crawler = self::$client->click($link);
 
 		$this->assertEquals(200, self::$client->getResponse()->getStatusCode());
-		$this->assertEquals('http://localhost/en/login', $crawler->getUri());
+		$this->assertEquals('http://localhost/en/login/', $crawler->getUri());
 	}
 
 	public function testSignUpLink()

@@ -52,6 +52,8 @@ class RoutingTest extends WebTestCase
 	public function testLoginRoute()
 	{
 		self::$client->request('GET', '/en/login');
+		$this->assertEquals(301, self::$client->getResponse()->getStatusCode());
+		self::$client->request('GET', '/en/login/');
 		$this->assertEquals(200, self::$client->getResponse()->getStatusCode());
 	}
 }

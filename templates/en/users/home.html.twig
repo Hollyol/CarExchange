@@ -11,6 +11,19 @@
 {% endblock %}
 
 {% block content %}
+<fieldset class = 'profile'>
+	<legend><h2>Profile :</h2></legend>
+	<p>
+	Pseudo : {{ app.user.username }}
+	Email : {{ app.user.mail }}<br />
+	{% if (app.user.phone != null) %}
+	Phone number : {{ app.user.phone }}<br />
+	{% endif %}
+	Address : {{ app.user.location.town }}, {{ app.user.location.state }} ({{ app.user.location.country }})
+	</p>
+</fieldset>
+
+<section class = 'advertsAndRentals'>
 	{% if app.user.adverts.count > 0 %}
 	<fieldset>
 		<legend><h2>Your Adverts :</h2></legend>
@@ -32,4 +45,5 @@
 		<a href='{{ path('app_adverts.search') }}'>Get one now</a> !
 		</p>
 	{% endif %}
+</section>
 {% endblock %}

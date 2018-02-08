@@ -31,6 +31,11 @@ app_users.home:
     defaults:
         _controller: 'App\Controller\UsersController::index'
 
+app_users.edit:
+    path: /{_locale}/users/edit/
+    defaults:
+        _controller: 'App\Controller\UsersController::edit'
+
 app_adverts.add:
     path: /{_locale}/adverts/add/
     defaults:

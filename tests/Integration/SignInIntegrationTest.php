@@ -18,7 +18,7 @@ class SignInIntegrationTest extends WebTestCase
 	 */
 	public function testSignInIntegration($locale)
 	{
-		$crawler = self::$client->request('GET', '/' . $locale . '/login');
+		$crawler = self::$client->request('GET', '/' . $locale . '/login/');
 
 		$this->assertNotEmpty($crawler->filter('fieldset'));
 		$this->assertNotEmpty($crawler->filter('legend'));

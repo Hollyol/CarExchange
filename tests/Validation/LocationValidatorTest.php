@@ -74,14 +74,6 @@ class LocationValidationTest extends TestCase
 				],
 				'state',
 			),
-			'no town provided' => array(
-				[
-					'country' => 'FR',
-					'state' => 'Alsace',
-					'town' => '',
-				],
-				'town',
-			),
 			'town name too long' => array(
 				[
 					'country' => 'FR',

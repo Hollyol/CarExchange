@@ -41,19 +41,17 @@ class MemberValidationTest extends KernelTestCase
 		parent::tearDownAfterClass();
 	}
 
-	public function testValidMember()
+	/**
+	 * @dataProvider validProvider
+	 */
+	public function testValidMember(Location $location, array $memberData)
 	{
-		$location = new Location();
-		$location->setCountry('FR');
-		$location->setState('Alsace');
-		$location->setTown('Strasbourg');
-
 		$member = new Member();
-		$member->setUsername('Hollyol');
-		$member->setPassword('fake');
-		$member->setPhone('09 09 09 09 09');
-		$member->setMail('hollyol@mail.com');
-		$member->setLanguage('fr');
+		$member->setUsername($memberData['username']);
+		$member->setPassword($memberData['password']);
+		$member->setPhone($memberData['phone']);
+		$member->setMail($memberData['mail']);
+		$member->setLanguage($memberData['language']);
 		$member->setLocation($location);
 
 		$errors = self::$validator->validate($member);
@@ -199,17 +197,6 @@ class MemberValidationTest extends KernelTestCase
 				],
 				'username',
 			),
-			'password not provided' => array(
-				$validLocation,
-				[
-					'username' => 'Hollyol',
-					'password' => '',
-					'phone' => '09 09 09 09 09',
-					'mail' => 'hollyol@mail.com',
-					'language' => 'fr',
-				],
-				'password',
-			),
 			'phone number too long' => array(
 				$validLocation,
 				[
@@ -253,6 +240,47 @@ class MemberValidationTest extends KernelTestCase
 					'language' => 'fr',
 				],
 				'mail',
+			),
+		);
+	}
+
+	public function validProvider()
+	{
+		$validLocation = new Location();
+		$validLocation->setCountry('FR');
+		$validLocation->setState('Alsace');
+		$validLocation->setTown('Strasbourg');
+
+		return array(
+			'everything provided' => array(
+				$validLocation,
+				[
+					'username' => 'Hollyol',
+					'password' => 'password',
+					'phone' => '09 09 09 09 09',
+					'mail' => 'hollyol@mail.com',
+					'language' => 'fr',
+				],
+			),
+			'phone not provided' => array(
+				$validLocation,
+				[
+					'username' => 'Hollyol',
+					'password' => 'password',
+					'phone' => '',
+					'mail' => 'hollyol@mail.com',
+					'language' => 'fr',
+				],
+			),
+			'password not provided' => array(
+				$validLocation,
+				[
+					'username' => 'Hollyol',
+					'password' => '',
+					'phone' => '09 09 09 09 09',
+					'mail' => 'hollyol@mail.com',
+					'language' => 'fr',
+				],
 			),
 		);
 	}
