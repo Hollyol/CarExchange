@@ -1,0 +1,62 @@
+app_core.home:
+    path: /
+    defaults:
+        _controller: 'App\Controller\CoreController::index'
+
+app_security.login:
+    path: /login/
+    defaults:
+        _controller: 'App\Controller\SecurityController::login'
+
+app_security.facebookLogin:
+    path: /facebookLogin/
+    defaults:
+        _controller: 'App\Controller\SecurityController::facebookLogin'
+
+app_security.logout:
+    path: /logout
+
+app_users.signup:
+    path: /users/signup/
+    defaults:
+        _controller: 'App\Controller\UsersController::addMember'
+
+app_users.facebookSignUp:
+    path: /users/facebookSignUp/
+    defaults:
+        _controller: 'App\Controller\UsersController::addFacebookMember'
+
+app_users.home:
+    path: /users/
+    defaults:
+        _controller: 'App\Controller\UsersController::index'
+
+app_users.edit:
+    path: /users/edit/
+    defaults:
+        _controller: 'App\Controller\UsersController::edit'
+
+app_adverts.add:
+    path: /adverts/add/
+    defaults:
+        _controller: 'App\Controller\AdvertsController::addAdvert'
+
+app_adverts.search:
+    path: /adverts/search/
+    defaults:
+        _controller: 'App\Controller\AdvertsController::search'
+
+app_adverts.rent:
+    path: /adverts/rent/{id}/
+    defaults:
+        _controller: 'App\Controller\AdvertsController::rent'
+
+app_adverts.delete:
+    path: /adverts/delete/{id}/
+    defaults:
+        _controller: 'App\Controller\AdvertsController::delete'
+
+app_adverts.edit:
+    path: /adverts/edit/{id}/
+    defaults:
+        _controller: 'App\Controller\AdvertsController::edit'

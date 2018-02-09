@@ -5,6 +5,7 @@
 
 :root {
 	--main_header-height: 50px;
+	--main_header-border_width: 3px;
 }
 
 html, body {
@@ -16,7 +17,7 @@ body {
 	display: flex;
 	flex-flow: column;
 	height: 100%;
-	margin-top: var(--main_header-height);
+	margin-top: calc(var(--main_header-height) + var(--main_header-border_width));
 	font-family: Arial, sans-serif;
 	text-align: center;
 }
@@ -50,6 +51,7 @@ a:hover {
 	font-weight: bold;
 	height: 100px;
 	width: 50%;
+	margin: auto;
 	border-color: #05c;
 	border-width: 3px;
 	border-style: solid;
@@ -65,7 +67,7 @@ a:hover {
 	width: 100%;
 	height: var(--main_header-height);
 	margin: auto;
-	border-bottom: 3px green solid;
+	border-bottom: var(--main_header-border_width) green solid;
 	background-color: #eee;
 	z-index: 1;
 }
@@ -138,7 +140,7 @@ a:hover {
 }
 
 #main_footer {
-	border-top: 3px green solid;
+	border-top: var(--main_header-border_width) green solid;
 	background-color: #eee;
 }
 
