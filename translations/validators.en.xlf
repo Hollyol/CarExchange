@@ -47,6 +47,11 @@
 				<target>This advert is not available during this period</target>
 			</trans-unit>
 
+			<trans-unit id = '11'>
+				<source>advert_edit.rentals_collision</source>
+				<target>This advert is rented during the period you are trying to shorten</target>
+			</trans-unit>
+
 			<trans-unit id = "10">
 				<source>member.empty_location</source>
 				<target>We need to know were you live (this information will be kept secret)</target>

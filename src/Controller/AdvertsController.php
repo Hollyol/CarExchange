@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 use App\Form\Advert\AddAdvertType;
+use App\Form\Advert\EditAdvertType;
 use App\Form\Advert\SearchAdvertType;
 use App\Form\Rental\AddRentalType;
 use App\Entity\Advert;
@@ -163,9 +164,37 @@ class AdvertsController extends Controller
 			throw new AccessDeniedHttpException('You are not allowed to delete this advert');
 		}
 
-		$em->flush();
+		$formAdvert = clone $advert;
+		$formAdvert->setCar(clone $advert->getCar());
+		$form = $this->createForm(EditAdvertType::class, $advert);
+		$form->get('hiddenBeginDate')->setData($formAdvert->getBeginDate()->format('Y-m-d'));
+		$form->get('hiddenEndDate')->setData($formAdvert->getEndDate()->format('Y-m-d'));
 
-		$this->addFlash('uhome', 'advert.edition_success');
-		return $this->redirectToRoute('app_users.home');
+		//Look for the last rental endDate
+		$lastRentalEndDate = $formAdvert->getRentals()[0]->getEndDate();
+		foreach ($formAdvert->getRentals() as $rental) {
+			if ($rental->getEndDate() > $lastRentalEndDate)
+				$lastRentalEndDate = $rental->getEndDate();
+		}
+		$form->get('lastRentalEndDate')->setData($lastRentalEndDate->format('Y-m-d'));
+
+		//Look for the first rental
+		$firstRentalBeginDate = $formAdvert->getRentals()[0]->getBeginDate();
+		foreach ($formAdvert->getRentals() as $rental) {
+			if ($rental->getBeginDate() < $firstRentalBeginDate)
+				$firstRentalBeginDate = $rental->getBeginDate();
+		}
+		$form->get('firstRentalBeginDate')->setData($firstRentalBeginDate->format('Y-m-d'));
+
+		$form->handleRequest($request);
+		if ($form->isSubmitted() AND $form->isValid()) {
+			$em->flush();
+			$this->addFlash('uhome', 'advert.edition_success');
+			return $this->redirectToRoute('app_users.home');
+		}
+
+		return $this->render($request->getLocale() . '/adverts/editAdvert.html.twig', array(
+			'form' => $form->createView(),
+		));
 	}
 }

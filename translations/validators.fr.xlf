@@ -47,6 +47,11 @@
 				<target>Cette voiture n'est pas disponible pendant cette période</target>
 			</trans-unit>
 
+			<trans-unit id = '11'>
+				<source>advert_edit.rentals_collision</source>
+				<target>Cette voiture est déjà louée pendant la période que vous essayez de raccourcir</target>
+			</trans-unit>
+
 			<trans-unit id = "10">
 				<source>member.empty_location</source>
 				<target>Nous avons besoin de savoir où vous habitez (Cette information sera gardée secrette)</target>
